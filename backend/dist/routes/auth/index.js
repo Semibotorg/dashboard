@@ -9,20 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv_1 = require("dotenv");
-(0, dotenv_1.config)();
-const createApp_1 = require("./utils/createApp");
-const PORT = process.env.PORT;
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const app = (0, createApp_1.createApp)();
-            app.listen(PORT, () => console.log(`listening on [${PORT}] port`));
-        }
-        catch (err) {
-            console.log(err);
-        }
-    });
-}
-main();
+const express_1 = require("express");
+const router = (0, express_1.Router)();
+router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.status(200).send({ msg: "ok" });
+}));
+exports.default = router;
 //# sourceMappingURL=index.js.map
