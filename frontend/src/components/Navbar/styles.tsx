@@ -13,13 +13,26 @@ export const Nav = styled.nav`
   margin: auto;
 `;
 
-export const FirstSection = styled(Link)`
+export const FirstSection = styled.div`
   display: flex;
   align-items: center;
   flex-direction: row;
   text-decoration: none;
   gap: 14px;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
+export const VerticalLine = styled.hr`
+      opacity: 0.6;
+    height: 34px;
+    border-width: 0px 0px 0px 2px;
+    border-image: initial;
+    border-color: #282e4e;
+    margin: 0 12px;
+    border-style: solid;
+`
 export const SecondSection = styled.ul`
   display: flex;
   align-items: center;
@@ -49,6 +62,10 @@ export const TextHeader = styled.span`
 export const ImgHeader = styled.img`
   width: 40px;
   border-radius: 50px;
+  transition: all 112ms var(--transition);
+  &:hover{
+    transform: scale(1.1);
+  }
 `;
 export const Flag = styled.img`
   width: 42px;
@@ -65,27 +82,36 @@ justify-content: center;
 flex-direction: column;
 border-radius: 5px;
 background-color: var(--second-theme-color);
-padding: 0 .5rem;
+padding: .7rem;
 line-height: 1px;
+animation-name: hover;
+animation-duration: .2s;
+@keyframes hover {
+  from {
+    margin-top: 1px;
+  }
+  to{
+    margin-top: 20px;
+  }
+}
 `
 
-export const ElementSelect = styled.h4`
+export const ElementSelect = styled.div`
 color: white;
 font-weight: 600;
 cursor: pointer;
 width: 150px;
 border-radius: 5px;
-padding-left: 0.75rem!important;
 line-height: 1rem;
-padding-right: 0.75rem!important;
-font-size: 15px;
-padding: .7rem;
+font-size: 16px;
+padding: .8rem;
 display: flex;
 align-items: center;
 flex-direction: row;
 gap: 20px;
+transition: background-color 60ms var(--transition);
 &:hover{
-    background-color: #1e1d25;
+    background-color: var(--hover-second-color);
 }
 &:first-child{
     margin-bottom: 0px;
@@ -93,5 +119,5 @@ gap: 20px;
 `
 
 export const ImgSelect = styled.img`
-    width: 20px;
+    width: 22px;
 `

@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
 :root{
-  --theme-color: #17161d;
-  --second-theme-color: #262530;
+  --theme-color: #171a2e;
+  --second-theme-color: #1d213a;
+  --hover-second-color: #282e4ea1;
   --transition: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
-
+@font-face {
+  font-family: qatar;
+  src: url('./assets/fonts/qatar.otf');
+}
 html{
   background-color: var(--theme-color);
   padding: 0;
   margin: 0;
+}
+*{
   font-family: 'Poppins', 'Vazirmatn', sans-serif;
 }
