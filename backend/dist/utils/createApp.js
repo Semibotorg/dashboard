@@ -22,6 +22,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -30,16 +39,23 @@ exports.createApp = void 0;
 const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("../routes"));
+const _1 = require("./");
+const passport_1 = __importDefault(require("passport"));
+require('../strategies/discord');
 function createApp() {
-    const app = (0, express_1.default)();
-    app.use(express_1.default.json());
-    app.use((0, express_1.urlencoded)({ extended: true }));
-    app.use((0, cors_1.default)({
-        origin: ["http://localhost:3000"],
-        credentials: true,
-    }));
-    app.use("/api", routes_1.default);
-    return app;
+    return __awaiter(this, void 0, void 0, function* () {
+        const app = (0, express_1.default)();
+        yield (0, _1.connectMongoose)(process.env.MONGOOSE_URL);
+        app.use(express_1.default.json());
+        app.use((0, express_1.urlencoded)({ extended: false }));
+        app.use((0, cors_1.default)({
+            origin: ["http://localhost:3000"],
+            credentials: true,
+        }));
+        app.use(passport_1.default.initialize());
+        app.use("/api", routes_1.default);
+        return app;
+    });
 }
 exports.createApp = createApp;
 //# sourceMappingURL=createApp.js.map

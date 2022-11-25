@@ -60,14 +60,14 @@ export function Homepage() {
       <ThirdSection>
         <StatsContainer>
           <Stats>
-            <p>2888</p>
+            <p>1</p>
             <span>{t('servers')}</span>
           </Stats>
           <Stats>
             <VerticalLine />
           </Stats>
           <Stats>
-            <p>100</p>
+            <p>1</p>
             <span>{t('users')}</span>
           </Stats>
         </StatsContainer>
