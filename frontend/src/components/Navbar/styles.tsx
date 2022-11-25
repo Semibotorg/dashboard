@@ -8,7 +8,6 @@ export const Nav = styled.nav`
   z-index: 100;
   max-width: 1240px;
   position: relative;
-  width: 100%;
   padding: 2rem 2rem;
   margin: auto;
 `;
@@ -52,6 +51,9 @@ cursor: pointer;
 &:hover{
     color: white;
 }
+@media screen and (max-width: 1024px) {
+  font-size: 12px;
+}
 `
 export const TextHeader = styled.span`
   color: white;
@@ -68,13 +70,20 @@ export const ImgHeader = styled.img`
   }
 `;
 export const Flag = styled.img`
-  width: 42px;
+  width: 32px;
   cursor: pointer;
 `;
+export const FlagContainer = styled.div`
+background-color: var(--second-theme-color);
+padding: 7px;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50px;
+`
 
 export const MenuSelect = styled.div`
 position: absolute;
-margin-left: -100px;
 margin-top: 20px;
 list-style: none;
 display: flex;
@@ -84,6 +93,7 @@ border-radius: 5px;
 background-color: var(--second-theme-color);
 padding: .7rem;
 line-height: 1px;
+transition: all .2s var(--transition);
 animation-name: hover;
 animation-duration: .2s;
 @keyframes hover {
@@ -120,4 +130,38 @@ transition: background-color 60ms var(--transition);
 
 export const ImgSelect = styled.img`
     width: 22px;
+`
+
+export const NavHover = styled.div`
+  position: absolute;
+  background-color: var(--second-theme-color);
+  padding: .6rem 1rem;
+  z-index: 100;
+  border: solid 2px var(--hover-second-color);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 120px;
+  
+  transition: all .2s var(--transition);
+  span{
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+  }
+`
+
+export const LinkHeader = styled(Link)`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`
+
+export const BarContainer = styled.div`
+  display: none;
+  @media screen and (max-width: 1024px) {
+    display: inherit;
+  }
 `

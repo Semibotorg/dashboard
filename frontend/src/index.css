@@ -4,6 +4,10 @@
   --theme-color: #171a2e;
   --second-theme-color: #1d213a;
   --hover-second-color: #282e4ea1;
+  --btn-discord-color: #7358f9;
+  --btn-discord-hover: #795eff8a;
+  --btn-color: #2a2f53;
+  --btn-color-hover: #242746;
   --transition: cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 @font-face {
@@ -17,4 +21,11 @@ html{
 }
 *{
   font-family: 'Poppins', 'Vazirmatn', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+.ltr-flag{
+  margin-left: -11rem;
+}
+.rtl-flag{
+  margin-right: -9rem;
 }

@@ -1,4 +1,8 @@
 {
     "commands":"Commands",
-    "support":"Support"
+    "support":"Support",
+    "home":"Home",
+    "home-t1":"Upgrade your server!",
+    "add-discord":"Add to discord",
+    "dashboard":"Dashboard"
 }
