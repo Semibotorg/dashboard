@@ -20,6 +20,8 @@ html{
   margin: 0;
 }
 *{
+  padding: 0;
+  margin: 0;
   font-family: 'Poppins', 'Vazirmatn', sans-serif;
   -webkit-tap-highlight-color: transparent;
 }
@@ -28,4 +30,16 @@ html{
 }
 .rtl-flag{
   margin-right: -9rem;
+}
+.dropdown-active{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: transform 200ms var(--transition),opacity 200ms var(--transition),visibility 200ms var(--transition);
+}
+.dropdown-inactive{
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: transform 200ms var(--transition),opacity 200ms var(--transition),visibility 200ms var(--transition);
 }

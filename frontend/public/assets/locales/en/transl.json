@@ -4,5 +4,13 @@
     "home":"Home",
     "home-t1":"Upgrade your server!",
     "add-discord":"Add to discord",
-    "dashboard":"Dashboard"
+    "dashboard":"Dashboard",
+    "protection-f":"Best protection",
+    "protection-f-d":"Our bot can protect your server from hacking(nuking), from sending links and more...",
+    "log-f":"Best logging",
+    "log-f-d":"Our bot can send a message with all details when anything happens on your server",
+    "mod-f":"Best moderation",
+    "mod-f-d":"You can control your server easily with a lot of commands and The bot has +30 moderation commands",
+    "servers":"Servers",
+    "users":"Users"
 }

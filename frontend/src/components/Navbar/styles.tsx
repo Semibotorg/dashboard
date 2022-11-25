@@ -93,17 +93,6 @@ border-radius: 5px;
 background-color: var(--second-theme-color);
 padding: .7rem;
 line-height: 1px;
-transition: all .2s var(--transition);
-animation-name: hover;
-animation-duration: .2s;
-@keyframes hover {
-  from {
-    margin-top: 1px;
-  }
-  to{
-    margin-top: 20px;
-  }
-}
 `
 
 export const ElementSelect = styled.div`
