@@ -13,8 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const axios_1 = __importDefault(require("axios"));
 const utils_1 = require("../../utils");
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const node_fetch_1 = __importDefault(require("node-fetch"));
+const v10_1 = require("discord-api-types/v10");
 const router = (0, express_1.Router)();
 router.get('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.redirect(utils_1.Auth.Url);
@@ -26,41 +28,35 @@ router.get('/callback', (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.status(200).send(`<script>window.close();</script>`);
     if (!code)
         return res.status(400).send({ msg: 'wrong code' });
-    const data = new URLSearchParams();
-    data.append('client_id', process.env.CLIENT_ID);
-    data.append('client_secret', process.env.CLIENT_SECRET);
-    data.append('grant_type', 'authorization_code');
-    data.append('redirect_uri', utils_1.Auth.RedirectUrl);
-    data.append('scope', utils_1.Scopes.join(' '));
-    data.append('code', code);
-    axios_1.default
-        .post('https://discord.com/api/oauth2/token', data, {
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-        // hsaduhdsadhuuh
-        .then((tokenResponse) => __awaiter(void 0, void 0, void 0, function* () {
-        // const userResponse = await axios.get(
-        //   'https://discord.com/api/users/@me',
-        //   {
-        //     headers: {
-        //       Authorization: `${tokenResponse.data.token_type} ${tokenResponse.data.access_token}`,
-        //     },
-        //   }
-        // );
-        console.log(tokenResponse.data);
-    })).catch(err => { console.log(err); });
-    // const userResponse = await axios.get(`https://discord.com/api/users/@me`,{
-    //     headers: {
-    //         Authorization: `${tokenResponse.data}`,
-    //       },
-    // }).catch(err => console.log(err))
-    // console.log(userResponse)
-    // const token = jwt.sign({
-    //     data: tokenResponse.data,
-    //     access_token: tokenResponse.data.access_token
-    // },process.env.JWT_PASSWORD as string)
+    try {
+        const data = new URLSearchParams();
+        data.append('client_id', process.env.CLIENT_ID);
+        data.append('client_secret', process.env.CLIENT_SECRET);
+        data.append('grant_type', 'authorization_code');
+        data.append('redirect_uri', utils_1.Auth.RedirectUrl);
+        data.append('scope', utils_1.Scopes.join(' '));
+        data.append('code', code);
+        const tokenWait = yield (0, node_fetch_1.default)(`${utils_1.DISCORD_API_URL}/${utils_1.DISCORD_API_VERSION}${v10_1.Routes.oauth2TokenExchange()}`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        });
+        const tokenResponse = yield tokenWait.json();
+        const userResponse = yield (0, utils_1.getUser)({ access_token: tokenResponse.access_token, token_type: tokenResponse.token_type });
+        const token = jsonwebtoken_1.default.sign({
+            access_token: tokenResponse.access_token,
+            refresh_token: tokenResponse.refresh_token,
+            user: userResponse
+        }, process.env.JWT_PASSWORD);
+        res
+            .status(200)
+            .send(`<script>window.opener.postMessage("${token} login", "*"); window.close(); </script>`);
+    }
+    catch (err) {
+        console.log(err);
+    }
 }));
 // http://localhost:5000/api/auth/login
 exports.default = router;

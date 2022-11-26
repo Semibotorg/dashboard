@@ -40,8 +40,6 @@ const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("../routes"));
 const _1 = require("./");
-const passport_1 = __importDefault(require("passport"));
-require('../strategies/discord');
 function createApp() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = (0, express_1.default)();
@@ -52,7 +50,6 @@ function createApp() {
             origin: ["http://localhost:3000"],
             credentials: true,
         }));
-        app.use(passport_1.default.initialize());
         app.use("/api", routes_1.default);
         return app;
     });

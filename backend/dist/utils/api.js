@@ -12,23 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const passport_1 = __importDefault(require("passport"));
-const passport_discord_1 = require("passport-discord");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-passport_1.default.use(new passport_discord_1.Strategy({
-    clientID: process.env.CLIENT_id,
-    clientSecret: process.env.CLIENT_SECRET,
-    callbackURL: 'http://localhost:5000/api/auth/callback',
-    scope: ['identify', 'guilds', 'guilds.join']
-}, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log({
-        accessToken,
-        refreshToken,
+exports.getUser = void 0;
+const v10_1 = require("discord-api-types/v10");
+const node_fetch_1 = __importDefault(require("node-fetch"));
+const utils_1 = require("../utils");
+const cli_color_1 = __importDefault(require("cli-color"));
+function getUser(token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const fetchuserResponse = yield (0, node_fetch_1.default)(`${utils_1.DISCORD_API_URL}/${utils_1.DISCORD_API_VERSION}${v10_1.Routes.user()}`, {
+            method: "GET",
+            headers: {
+                Authorization: `${token.token_type} ${token.access_token}`,
+            },
+        }).catch((err) => {
+            console.log(`${cli_color_1.default.red("[DISCORD API]")} Error`);
+            console.log(err);
+        });
+        const userResponse = yield fetchuserResponse.json();
+        return userResponse;
     });
-    const token = jsonwebtoken_1.default.sign({
-        accessToken,
-        refreshToken
-    }, process.env.JWT_PASSWORD);
-    done(null, token);
-})));
-//# sourceMappingURL=discord.js.map
+}
+exports.getUser = getUser;
+//# sourceMappingURL=api.js.map

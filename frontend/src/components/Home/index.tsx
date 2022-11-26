@@ -19,9 +19,11 @@ import {
   VerticalLine,
 } from "./styles";
 import { useTranslation } from "react-i18next";
-import { features } from "../../utils/constants";
+import { features, LoginDiscord } from "../../utils/";
+import axios from 'axios'
 export function Homepage() {
   const { t } = useTranslation();
+  
   return (
     <div>
       <Content>
@@ -32,7 +34,7 @@ export function Homepage() {
               <i className="fa-brands fa-discord"></i>
               {t("add-discord")}
             </InviteButton>
-            <DashboardButton>{t("dashboard")}</DashboardButton>
+            <DashboardButton onClick={LoginDiscord}>{t("login")}</DashboardButton>
           </ButtonsHome>
         </FirstSection>
         <SecondSection>

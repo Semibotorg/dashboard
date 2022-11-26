@@ -1,8 +1,9 @@
 import { Router } from "express";
 import axios from "axios";
-import { Auth, Scopes, DISCORD_API } from '../../utils'
+import { Auth, Scopes, DISCORD_API_URL, DISCORD_API_VERSION, getUser } from '../../utils'
 import jwt from 'jsonwebtoken'
-import passport from "passport";
+import fetch from "node-fetch";
+import {RESTPostOAuth2AccessTokenResult, Routes} from 'discord-api-types/v10'
 const router = Router()
 
 router.get('/login', async (req, res) => {
@@ -13,44 +14,40 @@ router.get('/callback', async (req, res) => {
     const error = req.query.error;
     if (error) return res.status(200).send(`<script>window.close();</script>`);
     if (!code) return res.status(400).send({ msg: 'wrong code' });
-  
-    const data = new URLSearchParams();
-    data.append('client_id', process.env.CLIENT_ID!);
-    data.append('client_secret', process.env.CLIENT_SECRET!);
-    data.append('grant_type', 'authorization_code');
-    data.append('redirect_uri', Auth.RedirectUrl);
-    data.append('scope', Scopes.join(' '));
-    data.append('code', code);
-    axios
-      .post('https://discord.com/api/oauth2/token', data, {
+
+      try{
+      const data = new URLSearchParams()
+      data.append('client_id', process.env.CLIENT_ID!);
+      data.append('client_secret', process.env.CLIENT_SECRET!);
+      data.append('grant_type', 'authorization_code');
+      data.append('redirect_uri', Auth.RedirectUrl);
+      data.append('scope', Scopes.join(' '));
+      data.append('code', code);
+      const tokenWait = await fetch(`${DISCORD_API_URL}/${DISCORD_API_VERSION}${Routes.oauth2TokenExchange()}`,{
+        method:'POST',
+        body:data,
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       })
-      // hsaduhdsadhuuh
-      .then(async (tokenResponse) => {
+      const tokenResponse: RESTPostOAuth2AccessTokenResult = await tokenWait.json()
+      const userResponse = await getUser({access_token: tokenResponse.access_token, token_type: tokenResponse.token_type})
         
-        // const userResponse = await axios.get(
-        //   'https://discord.com/api/users/@me',
-        //   {
-        //     headers: {
-        //       Authorization: `${tokenResponse.data.token_type} ${tokenResponse.data.access_token}`,
-        //     },
-        //   }
-        // );
-        console.log(tokenResponse.data)
-      }).catch(err => {console.log(err)})
-
-            // const userResponse = await axios.get(`https://discord.com/api/users/@me`,{
-        //     headers: {
-        //         Authorization: `${tokenResponse.data}`,
-        //       },
-        // }).catch(err => console.log(err))
-        // console.log(userResponse)
-        // const token = jwt.sign({
-        //     data: tokenResponse.data,
-        //     access_token: tokenResponse.data.access_token
-        // },process.env.JWT_PASSWORD as string)
+        const token = jwt.sign({
+            access_token: tokenResponse.access_token,
+            refresh_token: tokenResponse.refresh_token,
+            user: userResponse
+        },process.env.JWT_PASSWORD as string)
+    
+        res
+        .status(200)
+        .send(
+          `<script>window.opener.postMessage("${token} login", "*"); window.close(); </script>`
+        )
+  }catch(err){
+    console.log(err)
+  }
 })
+
 // http://localhost:5000/api/auth/login
 export default router;
