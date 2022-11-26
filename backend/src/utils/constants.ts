@@ -14,5 +14,11 @@ export const DISCORD_API_URL = 'https://discord.com/api'
 export interface UserJWT {
     access_token: string,
     refresh_token: string,
-    user: RESTGetAPICurrentUserResult
+    user: RESTGetAPICurrentUserResult,
+    token_type: string
+}
+
+export interface Stats{
+    serverCount: number,
+    usersCount: number
 }

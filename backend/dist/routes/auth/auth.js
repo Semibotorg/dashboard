@@ -48,7 +48,8 @@ router.get('/callback', (req, res) => __awaiter(void 0, void 0, void 0, function
         const token = jsonwebtoken_1.default.sign({
             access_token: tokenResponse.access_token,
             refresh_token: tokenResponse.refresh_token,
-            user: userResponse
+            user: userResponse,
+            token_type: tokenResponse.token_type
         }, process.env.JWT_PASSWORD);
         res
             .status(200)
@@ -60,4 +61,3 @@ router.get('/callback', (req, res) => __awaiter(void 0, void 0, void 0, function
 }));
 // http://localhost:5000/api/auth/login
 exports.default = router;
-//# sourceMappingURL=auth.js.map

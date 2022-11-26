@@ -15,4 +15,3 @@ function decodeJWT(token) {
     return decoded;
 }
 exports.decodeJWT = decodeJWT;
-//# sourceMappingURL=jwt.js.map

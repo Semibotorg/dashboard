@@ -19,4 +19,3 @@ __exportStar(require("./createApp"), exports);
 __exportStar(require("./constants"), exports);
 __exportStar(require("./api"), exports);
 __exportStar(require("./jwt"), exports);
-//# sourceMappingURL=index.js.map

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   ButtonsHome,
   Circle,
@@ -10,6 +10,7 @@ import {
   InviteButton,
   Line,
   LineDiv,
+  LoaderContainer,
   Review,
   ReviewText,
   SecondSection,
@@ -19,12 +20,26 @@ import {
   VerticalLine,
 } from "./styles";
 import { useTranslation } from "react-i18next";
-import { features, LoginDiscord } from "../../utils/";
+import { features, LoginDiscord, getUser } from "../../utils/";
+
 import axios from 'axios'
+import { useQuery, UseQueryResult } from 'react-query'
+import { RESTGetAPICurrentUserResult } from 'discord-api-types/v10'
+import { Oval } from 'react-loader-spinner'
 export function Homepage() {
   const { t } = useTranslation();
-  
+  const {data, status}: UseQueryResult<RESTGetAPICurrentUserResult, Error> = useQuery<RESTGetAPICurrentUserResult, Error>('user', getUser) 
+  if(status == 'loading'){
+    return (
+      <LoaderContainer>
+        <Oval color="#00BFFF" secondaryColor="#72638b" height={30} width={30} />
+      </LoaderContainer>
+    )
+  } else if(status == 'error'){
+    localStorage.removeItem("token")
+  }
   return (
+    
     <div>
       <Content>
         <FirstSection>
@@ -34,7 +49,9 @@ export function Homepage() {
               <i className="fa-brands fa-discord"></i>
               {t("add-discord")}
             </InviteButton>
-            <DashboardButton onClick={LoginDiscord}>{t("login")}</DashboardButton>
+            {
+              data ? (<DashboardButton>{t("dashboard")}</DashboardButton>) : (<DashboardButton onClick={LoginDiscord}>{t("login")}</DashboardButton>)
+            }
           </ButtonsHome>
         </FirstSection>
         <SecondSection>
@@ -47,7 +64,6 @@ export function Homepage() {
                 <span>{t(elm.text)}</span>
                 <p>{t(elm.description)}</p>
               </ReviewText>
-
               <LineDiv>
                 <Circle />
                 <Line

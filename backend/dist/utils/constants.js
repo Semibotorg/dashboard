@@ -9,4 +9,3 @@ var Auth;
 exports.Scopes = ['identify', 'guilds', 'guilds.join'];
 exports.DISCORD_API_VERSION = 'v10';
 exports.DISCORD_API_URL = 'https://discord.com/api';
-//# sourceMappingURL=constants.js.map

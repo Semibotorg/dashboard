@@ -36,7 +36,8 @@ router.get('/callback', async (req, res) => {
         const token = jwt.sign({
             access_token: tokenResponse.access_token,
             refresh_token: tokenResponse.refresh_token,
-            user: userResponse
+            user: userResponse,
+            token_type: tokenResponse.token_type
         },process.env.JWT_PASSWORD as string)
     
         res

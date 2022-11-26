@@ -10,4 +10,9 @@ export interface UserJWT {
     access_token: string;
     refresh_token: string;
     user: RESTGetAPICurrentUserResult;
+    token_type: string;
+}
+export interface Stats {
+    serverCount: number;
+    usersCount: number;
 }

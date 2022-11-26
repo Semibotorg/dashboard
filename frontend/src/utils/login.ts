@@ -2,7 +2,7 @@ import { Server } from "./";
 import axios from 'axios'
 export function LoginDiscord() {
     window.open(
-      `${Server.Url}/api/auth/login`,
+      `${Server.Url}/auth/login`,
       "_blank",
       `toolbar=no, location=no, directories=no,
       status=no, menubar=no, scrollbars=no, resizable=no,

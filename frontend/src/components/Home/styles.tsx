@@ -57,6 +57,13 @@ font-size: 16px;
     background-color: var(--btn-discord-hover);
 }
 `
+export const LoaderContainer = styled.div`
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+`
 export const DashboardButton = styled.button`
     padding: 0.9rem 2rem;
     color: white;

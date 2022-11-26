@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUser = void 0;
+exports.getUserGuilds = exports.getUser = void 0;
 const v10_1 = require("discord-api-types/v10");
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const utils_1 = require("../utils");
@@ -33,4 +33,16 @@ function getUser(token) {
     });
 }
 exports.getUser = getUser;
-//# sourceMappingURL=api.js.map
+function getUserGuilds(token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const fetchGuildsResponse = yield (0, node_fetch_1.default)(`${utils_1.DISCORD_API_URL}/${utils_1.DISCORD_API_VERSION}${v10_1.Routes.userGuilds()}`, {
+            method: "GET",
+            headers: {
+                Authorization: `${token.token_type} ${token.access_token}`,
+            },
+        });
+        const guildResponse = yield fetchGuildsResponse.json();
+        return guildResponse;
+    });
+}
+exports.getUserGuilds = getUserGuilds;
