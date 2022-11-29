@@ -61,3 +61,4 @@ router.get('/callback', (req, res) => __awaiter(void 0, void 0, void 0, function
 }));
 // http://localhost:5000/api/auth/login
 exports.default = router;
+//# sourceMappingURL=auth.js.map

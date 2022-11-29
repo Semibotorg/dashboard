@@ -35,3 +35,4 @@ const Schema = new mongoose_1.default.Schema({
     }
 });
 exports.default = mongoose_1.default.model("antiHack-test", Schema);
+//# sourceMappingURL=antihack.js.map

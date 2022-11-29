@@ -17,3 +17,4 @@ const Schema = new mongoose_1.default.Schema({
     Action: req_string
 });
 exports.default = mongoose_1.default.model('antiBot-test', Schema);
+//# sourceMappingURL=antibot.js.map

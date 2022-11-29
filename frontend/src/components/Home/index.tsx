@@ -63,12 +63,13 @@ async function RefreshUser(){
     getUser(localStorage.token)
       .then((data) => {
         setUser(data);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
     getStats().then((data) => {
       setStats(data);
     });
-    setLoading(false);
+    
   }, []);
   if (loading) {
     return (

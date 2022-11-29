@@ -16,3 +16,4 @@ const Schema = new mongoose_1.default.Schema({
     antiLink: req_string
 });
 exports.default = mongoose_1.default.model('antilink-test', Schema);
+//# sourceMappingURL=antilink.js.map

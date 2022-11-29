@@ -17,3 +17,4 @@ const Schema = new mongoose_1.default.Schema({
     Users: { type: Array, required: false }
 });
 exports.default = mongoose_1.default.model('muted', Schema);
+//# sourceMappingURL=muted.js.map

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserGuilds = exports.getUser = void 0;
+exports.getBotGuilds = exports.getUserGuilds = exports.getUser = void 0;
 const v10_1 = require("discord-api-types/v10");
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const utils_1 = require("../utils");
@@ -35,7 +35,7 @@ function getUser(token) {
 exports.getUser = getUser;
 function getUserGuilds(token) {
     return __awaiter(this, void 0, void 0, function* () {
-        const fetchGuildsResponse = yield (0, node_fetch_1.default)(`${utils_1.DISCORD_API_URL}/${utils_1.DISCORD_API_VERSION}${v10_1.Routes.userGuilds()}`, {
+        const fetchGuildsResponse = yield (0, node_fetch_1.default)(`${utils_1.DISCORD_API_URL}/${utils_1.DISCORD_API_VERSION}${v10_1.Routes.userGuilds()}?with_counts=true`, {
             method: "GET",
             headers: {
                 Authorization: `${token.token_type} ${token.access_token}`,
@@ -46,3 +46,17 @@ function getUserGuilds(token) {
     });
 }
 exports.getUserGuilds = getUserGuilds;
+function getBotGuilds(token) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const fetchGuildsResponse = yield (0, node_fetch_1.default)(`${utils_1.DISCORD_API_URL}/${utils_1.DISCORD_API_VERSION}${v10_1.Routes.userGuilds()}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bot ${token.BotToken}`,
+            },
+        });
+        const guildResponse = yield fetchGuildsResponse.json();
+        return guildResponse;
+    });
+}
+exports.getBotGuilds = getBotGuilds;
+//# sourceMappingURL=api.js.map

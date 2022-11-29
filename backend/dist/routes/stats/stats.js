@@ -11,3 +11,4 @@ router.get('/', (req, res) => {
     res.status(200).send({ stats });
 });
 exports.default = router;
+//# sourceMappingURL=stats.js.map

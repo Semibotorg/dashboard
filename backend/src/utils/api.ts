@@ -2,6 +2,7 @@ import {
   Routes,
   RESTGetAPICurrentUserResult,
   RESTGetAPICurrentUserGuildsResult,
+  
 } from "discord-api-types/v10";
 import fetch from "node-fetch";
 import { DISCORD_API_URL, DISCORD_API_VERSION } from "../utils";
@@ -32,11 +33,25 @@ export async function getUserGuilds(token: {
   token_type: string;
 }): Promise<RESTGetAPICurrentUserGuildsResult> {
   const fetchGuildsResponse = await fetch(
-    `${DISCORD_API_URL}/${DISCORD_API_VERSION}${Routes.userGuilds()}`,
+    `${DISCORD_API_URL}/${DISCORD_API_VERSION}${Routes.userGuilds()}?with_counts=true`,
     {
       method: "GET",
       headers: {
         Authorization: `${token.token_type} ${token.access_token}`,
+      },
+    }
+  );
+  const guildResponse: RESTGetAPICurrentUserGuildsResult = await fetchGuildsResponse.json();
+  return guildResponse;
+}
+
+export async function getBotGuilds(token:{BotToken: string}): Promise<RESTGetAPICurrentUserGuildsResult> {
+  const fetchGuildsResponse = await fetch(
+    `${DISCORD_API_URL}/${DISCORD_API_VERSION}${Routes.userGuilds()}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bot ${token.BotToken}`,
       },
     }
   );

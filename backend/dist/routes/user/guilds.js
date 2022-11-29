@@ -1,1 +1,1 @@
-"use strict";
+//# sourceMappingURL=guilds.js.map

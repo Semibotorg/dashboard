@@ -17,3 +17,4 @@ const Schema = new mongoose_1.default.Schema({
     lang: req_string,
 });
 exports.default = mongoose_1.default.model('language', Schema);
+//# sourceMappingURL=lang.js.map

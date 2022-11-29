@@ -27,3 +27,4 @@ const Schema = new mongoose_1.default.Schema({
     }
 });
 exports.default = mongoose_1.default.model('Log-test', Schema);
+//# sourceMappingURL=log.js.map

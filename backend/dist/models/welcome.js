@@ -18,3 +18,4 @@ const Schema = new mongoose_1.default.Schema({
     ChannelId: req_string
 });
 exports.default = mongoose_1.default.model('Welcome', Schema);
+//# sourceMappingURL=welcome.js.map

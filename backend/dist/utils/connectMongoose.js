@@ -26,3 +26,4 @@ function connectMongoose(url) {
     });
 }
 exports.connectMongoose = connectMongoose;
+//# sourceMappingURL=connectMongoose.js.map

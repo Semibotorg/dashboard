@@ -17,3 +17,4 @@ const Schema = new mongoose_1.default.Schema({
     Prefix: req_string
 });
 exports.default = mongoose_1.default.model('GuildCon', Schema);
+//# sourceMappingURL=prefix.js.map

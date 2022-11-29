@@ -12,3 +12,4 @@ router.use('/user', user_1.default);
 router.use('/auth', auth_1.default);
 router.use('/stats', stats_1.default);
 exports.default = router;
+//# sourceMappingURL=index.js.map
