@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import i18next from "i18next";
+import { Link } from "react-router-dom";
 export const Content = styled.div`
     margin: auto;
     max-width: 1240px;
@@ -74,6 +75,7 @@ export const DashboardButton = styled.button`
     background-color: var(--btn-color);
     transition: background-color .2s var(--transition);
     cursor: pointer;
+    text-decoration: none;
     &:hover{
         background-color: var(--btn-color-hover);
     }

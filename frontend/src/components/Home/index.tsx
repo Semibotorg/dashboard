@@ -20,26 +20,65 @@ import {
   VerticalLine,
 } from "./styles";
 import { useTranslation } from "react-i18next";
-import { features, LoginDiscord, getUser } from "../../utils/";
+import { features, Stats as StatsI, getStats, getUser, Server } from "../../utils/";
 
-import axios from 'axios'
-import { useQuery, UseQueryResult } from 'react-query'
-import { RESTGetAPICurrentUserResult } from 'discord-api-types/v10'
-import { Oval } from 'react-loader-spinner'
+import axios from "axios";
+import { RESTGetAPICurrentUserResult } from "discord-api-types/v10";
+import { Oval } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 export function Homepage() {
   const { t } = useTranslation();
-  const {data, status}: UseQueryResult<RESTGetAPICurrentUserResult, Error> = useQuery<RESTGetAPICurrentUserResult, Error>('user', getUser) 
-  if(status == 'loading'){
+  const [user, setUser] = useState<RESTGetAPICurrentUserResult | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [stats, setStats] = useState<StatsI>({
+    serverCount: 0,
+    usersCount: 0,
+  });
+  
+async function RefreshUser(){
+  await getUser(localStorage.token).then((data) => {
+    setUser(data)
+  } )
+}
+ async function LoginDiscord() {
+    window.open(
+      `${Server.Url}/auth/login`,
+      "_blank",
+      `toolbar=no, location=no, directories=no,
+      status=no, menubar=no, scrollbars=no, resizable=no,
+      copyhistory=no, width=800, height=1200,
+      top=${window.screen.height / 2 - 600 / 2}, left=${
+        window.screen.width / 2 - 450 / 2
+      }`
+    );
+    window.addEventListener('message', async (message: any) => {
+      if(typeof message.data == 'object') return
+      if(message.data.split(" ")[1] !== "login") return
+      localStorage.token = message.data.split(" ")[0];
+      RefreshUser()
+    })
+  }
+  useEffect(() => {
+    setLoading(true)
+    getUser(localStorage.token)
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => console.log(err));
+    getStats().then((data) => {
+      setStats(data);
+    });
+    setLoading(false);
+  }, []);
+  if (loading) {
     return (
       <LoaderContainer>
         <Oval color="#00BFFF" secondaryColor="#72638b" height={30} width={30} />
       </LoaderContainer>
-    )
-  } else if(status == 'error'){
-    localStorage.removeItem("token")
+    );
   }
+
   return (
-    
     <div>
       <Content>
         <FirstSection>
@@ -49,9 +88,15 @@ export function Homepage() {
               <i className="fa-brands fa-discord"></i>
               {t("add-discord")}
             </InviteButton>
-            {
-              data ? (<DashboardButton>{t("dashboard")}</DashboardButton>) : (<DashboardButton onClick={LoginDiscord}>{t("login")}</DashboardButton>)
-            }
+            {user ? (
+              <Link to='/dashboard'>
+              <DashboardButton>{t("dashboard")}</DashboardButton>
+              </Link>
+            ) : (
+              <DashboardButton onClick={LoginDiscord}>
+                {t("login")}
+              </DashboardButton>
+            )}
           </ButtonsHome>
         </FirstSection>
         <SecondSection>
@@ -78,15 +123,15 @@ export function Homepage() {
       <ThirdSection>
         <StatsContainer>
           <Stats>
-            <p>1</p>
-            <span>{t('servers')}</span>
+            <p>{stats.serverCount}</p>
+            <span>{t("servers")}</span>
           </Stats>
           <Stats>
             <VerticalLine />
           </Stats>
           <Stats>
-            <p>1</p>
-            <span>{t('users')}</span>
+            <p>{stats.usersCount}</p>
+            <span>{t("users")}</span>
           </Stats>
         </StatsContainer>
       </ThirdSection>

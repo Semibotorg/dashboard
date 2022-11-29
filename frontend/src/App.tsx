@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import { Routes, Route } from 'react-router-dom'
-import { Homepage, Navbar } from './components'
+import { Homepage, Navbar, GuildPage } from './components'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 function App() {
@@ -14,6 +14,7 @@ function App() {
       <Navbar />
      <Routes>
       <Route path='/' element={<Homepage/>}/>
+      <Route path='/dashboard' element={<GuildPage/>} />
      </Routes>
     </div>
   )
