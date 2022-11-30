@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import fetch from 'node-fetch'
-import { DISCORD_API_URL, DISCORD_API_VERSION, decodeJWT, getUser, getUserGuilds, getBotGuilds, getMatualGuilds } from '../../utils'
+import { DISCORD_API_URL, DISCORD_API_VERSION, decodeJWT, getUser, getUserGuilds, getBotGuilds, getMatualGuilds, RUST_API_URL } from '../../utils'
 import { Routes } from 'discord-api-types/v10'
 const router = Router()
 
@@ -40,6 +40,17 @@ router.get('/guilds', async (req, res) => {
         console.log(err)
         res.status(400).send({msg:'error occured'})
     }
+})
+
+router.get('/guilds/:id', async (req, res) => {
+    const { authorization } = req.headers
+    if (!authorization) return res.status(401).send({ msg: 'token not found' })
+    const jwtResult = decodeJWT(authorization)
+
+    const guildResponse = await fetch(`${RUST_API_URL}`)
+    const guildData = await guildResponse.json()
+
+    res.send(guildData)
 })
 
 export default router;

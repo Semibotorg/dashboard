@@ -10,7 +10,7 @@ export const Scopes = ['identify', 'guilds', 'guilds.join']
 
 export const DISCORD_API_VERSION = 'v10'
 export const DISCORD_API_URL = 'https://discord.com/api'
-
+export const RUST_API_URL = 'http://localhost:8000'
 export interface UserJWT {
     access_token: string,
     refresh_token: string,

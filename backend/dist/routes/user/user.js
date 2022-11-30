@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const utils_1 = require("../../utils");
 const router = (0, express_1.Router)();
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,6 +51,11 @@ router.get('/guilds', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.log(err);
         res.status(400).send({ msg: 'error occured' });
     }
+}));
+router.get('/guilds/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const guildResponse = yield (0, node_fetch_1.default)(`${utils_1.RUST_API_URL}`);
+    const guildData = yield guildResponse.json();
+    res.send(guildData);
 }));
 exports.default = router;
 //# sourceMappingURL=user.js.map
