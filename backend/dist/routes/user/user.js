@@ -36,10 +36,12 @@ router.get('/guilds', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         if (!authorization)
             return res.status(401).send({ msg: 'token not found' });
         const jwtResult = (0, utils_1.decodeJWT)(authorization);
-        const userGuilds = yield (0, utils_1.getUserGuilds)({ access_token: jwtResult.access_token, token_type: jwtResult.token_type });
-        const botGuilds = yield (0, utils_1.getBotGuilds)({ BotToken: process.env.BOT_TOKEN });
-        const dataGuilds = yield (0, utils_1.getMatualGuilds)(userGuilds, botGuilds);
-        res.status(200).send(dataGuilds);
+        setTimeout(() => __awaiter(void 0, void 0, void 0, function* () {
+            const userGuilds = yield (0, utils_1.getUserGuilds)({ access_token: jwtResult.access_token, token_type: jwtResult.token_type });
+            const botGuilds = yield (0, utils_1.getBotGuilds)({ BotToken: process.env.BOT_TOKEN });
+            const dataGuilds = yield (0, utils_1.getMatualGuilds)(userGuilds, botGuilds);
+            res.status(200).send(dataGuilds);
+        }), 1000);
     }
     catch (err) {
         console.log(err);

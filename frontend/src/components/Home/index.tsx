@@ -65,7 +65,9 @@ async function RefreshUser(){
         setUser(data);
         setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setLoading(false);
+      });
     getStats().then((data) => {
       setStats(data);
     });

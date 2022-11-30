@@ -27,13 +27,15 @@ router.get('/guilds', async (req, res) => {
         const { authorization } = req.headers
         if (!authorization) return res.status(401).send({ msg: 'token not found' })
         const jwtResult = decodeJWT(authorization)
+
+        setTimeout(async() => {
+            const userGuilds = await getUserGuilds({access_token: jwtResult.access_token, token_type: jwtResult.token_type})
+            const botGuilds = await getBotGuilds({BotToken: process.env.BOT_TOKEN!})
     
-        const userGuilds = await getUserGuilds({access_token: jwtResult.access_token, token_type: jwtResult.token_type})
-        const botGuilds = await getBotGuilds({BotToken: process.env.BOT_TOKEN!})
-    
-        const dataGuilds = await getMatualGuilds(userGuilds, botGuilds)
-    
-        res.status(200).send(dataGuilds)
+            const dataGuilds = await getMatualGuilds(userGuilds, botGuilds)
+        
+            res.status(200).send(dataGuilds)
+        },1000)
     }catch(err){
         console.log(err)
         res.status(400).send({msg:'error occured'})
