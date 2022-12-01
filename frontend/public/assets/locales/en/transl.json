@@ -14,5 +14,8 @@
     "servers":"Servers",
     "users":"Users",
     "login":"Login",
-    "select-server":"Select a server"
+    "select-server":"Select a server",
+    "server-control":"Server control",
+    "semibot":"semibot",
+    "settings":"Settings"
 }

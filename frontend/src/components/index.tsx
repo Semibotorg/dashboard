@@ -1,3 +1,5 @@
 export * from './Home'
 export * from './Navbar'
 export * from './GuildPage'
+export * from './Dashboard'
+export * from './NavbarSidebar'

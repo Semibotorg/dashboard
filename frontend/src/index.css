@@ -7,10 +7,15 @@
   --btn-discord-color: #7358f9;
   --btn-discord-hover: #795eff8a;
   --btn-color: #2a2f53;
+  --nav-bg: #1e213a;
+  --nav-btn-color: #292d4e;
+  --nav-btn-color-hover: #333861;
   --btn-color-hover: #242746;
   --transition: cubic-bezier(0.39, 0.575, 0.565, 1);
   --hover-guild-btn-color: #3c4272;
   --img-circle-guild: #333652;
+  --sidebar-bg-color: #121422;
+  --sidebar-btn-hover: #1c1f35;
 }
 @font-face {
   font-family: qatar;
@@ -54,4 +59,20 @@ html{
   visibility: hidden;
   transform: translateY(-20px);
   transition: transform 200ms var(--transition),opacity 200ms var(--transition),visibility 200ms var(--transition);
+}
+
+.sidebar-active{
+  transform: translateX(0%);
+}
+.sidebar-active-rtl{
+  transform: translate(0%);
+}
+
+@media screen and (max-width: 1024px) {
+  .sidebar-active{
+    transform: translateX(-100%);
+  }
+  .sidebar-active-rtl{
+    transform: translate(100%);
+  }
 }

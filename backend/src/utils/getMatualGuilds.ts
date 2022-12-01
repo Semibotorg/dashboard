@@ -1,6 +1,7 @@
 import { RESTGetAPICurrentUserGuildsResult } from 'discord-api-types/v10'
 
 export function getMatualGuilds(userGuilds: RESTGetAPICurrentUserGuildsResult, botGuilds: RESTGetAPICurrentUserGuildsResult){
+  if(!userGuilds || !botGuilds) return
     const validGuilds = userGuilds.filter(
         (guild) => ((guild.permissions as any) & 0x08) === 0x08
       );
