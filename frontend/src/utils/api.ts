@@ -5,7 +5,7 @@ import { Stats, Guilds } from './'
 export async function getUser(token: string): Promise<RESTGetAPICurrentUserResult | null>{
     const res = await axios.get(`${Server.Url}/user`,{
         headers:{
-            authorization: localStorage.token
+            authorization: token
         }
     })
 
@@ -25,7 +25,18 @@ export async function getStats(): Promise<Stats> {
 export async function getGuilds(token: string): Promise<Guilds> {
     const res = await axios.get(`${Server.Url}/user/guilds`,{
         headers:{
-            authorization: localStorage.token
+            authorization: token
+        }
+    })
+    const data: Guilds = res.data
+
+    return data
+}
+
+export async function getGuild(token: string, guildId: string): Promise<Guilds> {
+    const res = await axios.get(`${Server.Url}/user/guilds/${guildId}`,{
+        headers:{
+            authorization: token
         }
     })
     const data: Guilds = res.data

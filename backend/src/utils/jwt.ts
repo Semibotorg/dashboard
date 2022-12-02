@@ -6,7 +6,7 @@ try{
      decoded = jwt.verify(token, process.env.JWT_PASSWORD!)
     
 }catch(err){
-
+    console.log(err)
 }
 return decoded
 }

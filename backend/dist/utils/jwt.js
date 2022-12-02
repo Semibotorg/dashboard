@@ -11,6 +11,7 @@ function decodeJWT(token) {
         decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_PASSWORD);
     }
     catch (err) {
+        console.log(err);
     }
     return decoded;
 }

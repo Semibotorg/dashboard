@@ -3,7 +3,7 @@ import { NavbarSidebar } from "../";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import { addUser } from "../../store/user/user";
-import { getUser } from "../../utils";
+import { getGuild, getUser } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import {
   Content,
@@ -14,11 +14,11 @@ import {
   SidebarMenu,
   SidebarMenuHeader,
   BarContainerSidebar,
-  LogoHeaderSidebar
+  LogoHeaderSidebar,
 } from "./styles";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/semibot.png";
-import { HomeIcon, Cog6ToothIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, Cog6ToothIcon, ChevronDownIcon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useParams, useLocation } from "react-router-dom";
 import i18next from "i18next";
 
@@ -79,26 +79,20 @@ export function Dashboard() {
           icon: Cog6ToothIcon,
           link: "/settings",
         },
-      ],
-    },
-    {
-      header: t('server-control'),
-      state: sidebar,
-      stateText: 'serverControl2',
-      elements: [
         {
-          text: t('dashboard'),
-          icon: HomeIcon,
-          link: "/" || "",
-        },
-        {
-          text: t('settings'),
-          icon: Cog6ToothIcon,
-          link: "/settings",
+          text: t('premium'),
+          icon: ShoppingCartIcon,
+          link: "/premium",
         },
       ],
     },
   ];
+
+  useEffect(() => {
+    getGuild(localStorage.token, params.id!).then((data) => {
+      console.log(data)
+    })
+  },[])
 
   return (
     <div>
