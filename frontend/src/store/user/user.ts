@@ -1,9 +1,12 @@
 import { APIUser, APIGuild } from "discord-api-types/v10";
 import { createSlice, CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import { Guilds } from '../../utils/constants'
+import { Guilds, StateDashboardI } from '../../utils/constants'
+
 const initialStateUser: APIUser = null as any
 const initialStateGuild: Guilds = null as any
-const initialStateDashboard: APIGuild = null as any
+const initialStateDashboard: StateDashboardI = {
+    guilds:[]
+}
 const initialStateLoadingDashboard: boolean = null as any
 
 export const userSlice = createSlice({
@@ -30,7 +33,7 @@ export const guildDashboardSlice = createSlice({
     name:'dashboard',
     initialState: initialStateDashboard,
     reducers:{
-        addDashboard: (state, action: PayloadAction<APIGuild>) => {
+        addDashboard: (state, action: PayloadAction<StateDashboardI>) => {
             return action.payload
         }
     }

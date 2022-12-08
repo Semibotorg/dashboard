@@ -2,7 +2,7 @@ import arabic from "../assets/flags/arabic.png";
 import i18n, { t } from "i18next";
 import english from "../assets/flags/english.png";
 import testingIMG from '../assets/features/test.webp'
-import { RESTGetAPICurrentUserGuildsResult } from 'discord-api-types/v10'
+import { APIGuild, RESTGetAPICurrentUserGuildsResult } from 'discord-api-types/v10'
 export const langs = [
   {
     label: "English",
@@ -63,4 +63,8 @@ export interface Stats{
 export interface Guilds {
   included: RESTGetAPICurrentUserGuildsResult,
   excluded: RESTGetAPICurrentUserGuildsResult
+}
+
+export interface StateDashboardI {
+  guilds: APIGuild[]
 }

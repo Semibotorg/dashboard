@@ -1,3 +1,4 @@
+import i18next from "i18next";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const Sidebar = styled.div`
@@ -128,4 +129,15 @@ flex-direction: row;
     
 }
 
+`
+
+export const DashboardContent = styled.div`
+    position: absolute;
+    margin-top: 105px !important;
+    z-index: -10;
+    @media screen and (max-width: 1024px) {
+    left: 2rem !important;
+    right: 2rem !important;
+
+}
 `

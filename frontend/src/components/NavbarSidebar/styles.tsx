@@ -85,6 +85,7 @@ export const FlagContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 50px;
+  z-index: 1000;
   transition: all 75ms var(--transition);
   &:hover {
     background-color: var(--nav-btn-color-hover);
