@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Server } from './config'
-import { RESTGetAPICurrentUserResult } from 'discord-api-types/v10'
+import { RESTGetAPICurrentUserResult, APIGuild } from 'discord-api-types/v10'
 import { Stats, Guilds } from './'
 export async function getUser(token: string): Promise<RESTGetAPICurrentUserResult | null>{
     const res = await axios.get(`${Server.Url}/user`,{
@@ -33,13 +33,13 @@ export async function getGuilds(token: string): Promise<Guilds> {
     return data
 }
 
-export async function getGuild(token: string, guildId: string): Promise<Guilds> {
+export async function getGuild(token: string, guildId: string): Promise<APIGuild> {
     const res = await axios.get(`${Server.Url}/user/guilds/${guildId}`,{
         headers:{
             authorization: token
         }
     })
-    const data: Guilds = res.data
+    const data: APIGuild = res.data
 
     return data
 }

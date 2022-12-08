@@ -36,7 +36,6 @@ router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     if (!authorization)
         return res.status(401).send({ msg: 'token not found' });
     const jwtResult = (0, utils_1.decodeJWT)(authorization);
-    console.log(jwtResult.user.id);
     const guild = index_1.client.guilds.cache.get(params.id);
     if (!guild)
         return res.status(400).send({ msg: 'guild not found' });
