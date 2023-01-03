@@ -18,17 +18,16 @@ border-right: 1px solid var(--btn-color-hover);
 transition: all .2s var(--transition);
 `
 
-export const Content = styled.div`
-    display: flex;
-    flex-direction: row;
 
+export const Content = styled.div`
+  overflow: hidden;
+  height: 100vh;
 `
 export const SidebarContainer = styled.div`
-    display: flex;
-    flex-direction: row !important;
-    width: 100%;
-    gap: 4rem;
-    height: 100%;
+  display: flex;
+  height: 100%;
+  gap: 54px;
+
 `
 export const SidebarContent = styled.div`
     display: flex;
@@ -141,12 +140,13 @@ flex-direction: row;
 `
 
 export const DashboardContent = styled.div`
-    position: relative;
-    margin-top: 155px !important;
-    width: 100%;
+overflow: scroll;
+padding-top: 152px;
+flex: 1 0 auto;
 
     @media screen and (max-width: 1024px) {
+        flex: 1 0 0;
         padding: 0 25px;
-
+        
 }
 `

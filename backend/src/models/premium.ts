@@ -5,6 +5,7 @@ interface Idoc extends mongoose.Document {
     startDate: Date | any,
     endDate: Date | any,
     paymentId: string | any,
+    lifeTime: boolean | any
 }
 
 const req_string: object = {
@@ -22,6 +23,10 @@ const Schema: mongoose.Schema = new mongoose.Schema<Idoc>({
     startDate: req_date,
     endDate: req_date,
     paymentId: req_string,
+    lifeTime: {
+        type: Boolean,
+        required: true
+    }
 })
 
 export default mongoose.model<Idoc>('premiumSubscriptions', Schema)

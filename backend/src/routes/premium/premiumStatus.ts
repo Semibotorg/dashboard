@@ -35,10 +35,17 @@ router.get('/', async (req, res) => {
     if(!data){
         return res.status(500).send({ error: `Can't find data` });
     }
-    return res.status(200).send({
-        active: !isExpired(data),
-        ...data
-    })
+    if(data.lifeTime){
+        return res.status(200).send({
+            active: true,
+            ...data
+        })
+    }else{
+        return res.status(200).send({
+            active: !isExpired(data),
+            ...data
+        })
+    }
 
     }catch(err){
         if(err) return res.status(500).send({ error: 'Error checking subscription status' });

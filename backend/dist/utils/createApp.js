@@ -40,6 +40,7 @@ const express_1 = __importStar(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const routes_1 = __importDefault(require("../routes"));
 const _1 = require("./");
+const paypal_rest_sdk_1 = __importDefault(require("paypal-rest-sdk"));
 function createApp() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = (0, express_1.default)();
@@ -50,6 +51,11 @@ function createApp() {
             origin: ["http://localhost:3000"],
             credentials: true,
         }));
+        paypal_rest_sdk_1.default.configure({
+            mode: 'sandbox',
+            client_id: 'ASgdeCAlq4j66xisRHOLFysw2flfMGQa3G-hrDezDVkKvdkWcIVlks9rp_xsC7BuSy71s9SadNPtxird',
+            client_secret: 'EKzMa64bnGhjZ3Xg5nWErjvUiTzfK1JuYIFFzL-p0aVmFkh-3MNjjAxk1JCFuVb2EtUOU0ys4unnEIWp'
+        });
         app.use("/api", routes_1.default);
         return app;
     });

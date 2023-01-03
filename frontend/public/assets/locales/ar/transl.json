@@ -18,5 +18,12 @@
     "semibot":"سيمي بوت",
     "settings":"الاعدادات",
     "server-control":"مراقبة السيرفر",
-    "premium":"بريميوم"
+    "premium":"بريميوم",
+    "premium-title": "اشتراك البريميوم",
+    "monthly":"شهرياً",
+    "yearly":"سنوياً",
+    "lifetime":"مدى الحياة",
+    "subscribe":"اشترك",
+    "most-popular":"الأكثر شهرة",
+    "pay-paypal":"ادفع عن طريق بايبال"
 }

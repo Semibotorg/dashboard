@@ -18,5 +18,12 @@
     "server-control":"Server control",
     "semibot":"semibot",
     "settings":"Settings",
-    "premium":"Premium"
+    "premium":"Premium",
+    "premium-title": "Premium subscription",
+    "monthly":"Monthly",
+    "yearly":"Yearly",
+    "lifetime":"Lifetime",
+    "subscribe":"Subscribe",
+    "most-popular":"Most popular",
+    "pay-paypal":"Pay using paypal"
 }

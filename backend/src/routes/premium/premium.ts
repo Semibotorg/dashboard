@@ -27,6 +27,7 @@ let nameItem;
 let periodTime;
 let startDate: Date
 let endDate: Date
+let lifetime: boolean
 router.post("/subscribe", async (req, res) => {
   const { authorization } = req.headers;
   if (!authorization) return res.status(401).send({ msg: "token not found" });
@@ -39,12 +40,14 @@ router.post("/subscribe", async (req, res) => {
     GuildId = req.body.guild_id;
     nameItem = req.body.product_name;
     periodTime = req.body.period
+    lifetime = req.body.lifetime
     //checking period of time
   if (
     periodTime > 12 ||
     periodTime < 1 ||
     typeof periodTime !== "number" ||
-    isNaN(periodTime)
+    isNaN(periodTime) || 
+    typeof lifetime !== 'boolean'
   )
     return await res
       .status(200)
@@ -136,6 +139,7 @@ router.get("/return", async (req, res) => {
                 startDate: startDate,
                 endDate: endDate,
                 paymentId: paymentId,
+                lifeTime: lifetime
             },{
                 upsert: true
             })

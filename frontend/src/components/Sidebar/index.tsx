@@ -209,11 +209,6 @@ export function SidebarPage(): JSX.Element{
           
           {loading ? null : (
             <DashboardContent
-              // style={
-              //   i18next.language == "ar"
-              //     ? { right: "400px" }
-              //     : { left: "400px" }
-              // }
             >
               {dashboardContents.map((elm) => {
                 return (
