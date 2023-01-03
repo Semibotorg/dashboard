@@ -4,6 +4,7 @@ export const Nav = styled.nav`
   width: 100%;
   background-color: var(--nav-bg);
   position: fixed;
+  z-index: 1;
 `;
 
 export const Nav2 = styled.div`
@@ -97,6 +98,7 @@ export const MenuSelect = styled.div`
   margin-top: 20px;
   list-style: none;
   display: flex;
+   z-index: 1000;
   justify-content: center;
   flex-direction: column;
   border-radius: 5px;

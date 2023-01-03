@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const Sidebar = styled.div`
 
-position: fixed;
+position: relative;
 height: 100%;
-min-height: 100%;
+min-height: 100vh;
 min-width: 305px;
 width: 305px;
 z-index: 100;
@@ -13,6 +13,7 @@ background: var(--sidebar-bg-color);
 border-right: 1px solid var(--btn-color-hover);
 @media screen and (max-width: 1024px) {
     width: 100%;
+    position: fixed;
 }
 transition: all .2s var(--transition);
 `
@@ -20,6 +21,14 @@ transition: all .2s var(--transition);
 export const Content = styled.div`
     display: flex;
     flex-direction: row;
+
+`
+export const SidebarContainer = styled.div`
+    display: flex;
+    flex-direction: row !important;
+    width: 100%;
+    gap: 4rem;
+    height: 100%;
 `
 export const SidebarContent = styled.div`
     display: flex;
@@ -132,12 +141,12 @@ flex-direction: row;
 `
 
 export const DashboardContent = styled.div`
-    position: absolute;
-    margin-top: 105px !important;
-    z-index: -10;
+    position: relative;
+    margin-top: 155px !important;
+    width: 100%;
+
     @media screen and (max-width: 1024px) {
-    left: 2rem !important;
-    right: 2rem !important;
+        padding: 0 25px;
 
 }
 `

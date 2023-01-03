@@ -20,6 +20,7 @@ import {
   BarContainerSidebar,
   LogoHeaderSidebar,
   DashboardContent,
+  SidebarContainer,
 } from "./styles";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/semibot.png";
@@ -123,8 +124,10 @@ export function SidebarPage(): JSX.Element{
   return (
     
       <div>
+                          <NavbarSidebar setSidebarToggle={setSidebarToggle} user={userRedux} />
         <Content>
-          <NavbarSidebar setSidebarToggle={setSidebarToggle} user={userRedux} />
+          <SidebarContainer>
+            
           <Sidebar
             className={`${
               !sidebarToggle && i18next.language == "ar"
@@ -203,13 +206,14 @@ export function SidebarPage(): JSX.Element{
               </SidebarMenu>
             </SidebarContent>
           </Sidebar>
+          
           {loading ? null : (
             <DashboardContent
-              style={
-                i18next.language == "ar"
-                  ? { right: "400px" }
-                  : { left: "400px" }
-              }
+              // style={
+              //   i18next.language == "ar"
+              //     ? { right: "400px" }
+              //     : { left: "400px" }
+              // }
             >
               {dashboardContents.map((elm) => {
                 return (
@@ -220,6 +224,7 @@ export function SidebarPage(): JSX.Element{
               })}
             </DashboardContent>
           )}
+          </SidebarContainer>
         </Content>
       </div>
     

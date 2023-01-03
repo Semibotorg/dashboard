@@ -27,7 +27,7 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     catch (err) {
         console.log(err);
-        res.status(400).send({ msg: 'error occured' });
+        res.status(400).send({ msg: 'error occured', reason: 'GUILD_MISSED' });
     }
 }));
 router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {

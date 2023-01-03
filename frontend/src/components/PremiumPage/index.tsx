@@ -10,6 +10,7 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import { APIGuild } from "discord-api-types/v10";
 import { dashboardPageSetup } from "../../utils/functions";
+import {ChooseContainer, ChooseOption, Container} from './styles'
 
 export function PremiumPage() {
   const navigate = useNavigate();
@@ -27,11 +28,13 @@ export function PremiumPage() {
     dashboardPageSetup(reduxSelector, dispatch, params, navigate, location);
     setLoading(false);
   }, []);
-  return (
+  return guildRedux && (
     <div>
       <div>
         <div>
-          {!guildRedux ? <h1>Loading...</h1> : <h1>{guildRedux.name}</h1>}
+         <Container>
+          
+         </Container>
         </div>
       </div>
     </div>

@@ -38,9 +38,11 @@ export function GuildPage() {
           dispatch(addGuild(data));
           setLoading(false);
         })
-        .catch((err) => {
+        .catch(async(err) => {
           console.log(err);
-          navigate("/");
+          await localStorage.removeItem('token')
+          navigate('/')
+          window.location.reload()
         });
     } else {
       setLoading(false);

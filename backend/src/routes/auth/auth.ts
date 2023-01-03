@@ -50,5 +50,4 @@ router.get('/callback', async (req, res) => {
   }
 })
 
-// http://localhost:5000/api/auth/login
 export default router;

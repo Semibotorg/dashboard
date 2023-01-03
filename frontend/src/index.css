@@ -50,29 +50,36 @@ html{
 }
 .dropdown-active{
   opacity: 1;
+  z-index: 1000;
   visibility: visible;
   transform: translateY(0);
+  
   transition: transform 200ms var(--transition),opacity 200ms var(--transition),visibility 200ms var(--transition);
 }
 .dropdown-inactive{
   opacity: 0;
+  z-index: 1000;
   visibility: hidden;
   transform: translateY(-20px);
   transition: transform 200ms var(--transition),opacity 200ms var(--transition),visibility 200ms var(--transition);
 }
 
 .sidebar-active{
+  
   transform: translateX(0%);
 }
 .sidebar-active-rtl{
+  
   transform: translate(0%);
 }
 
 @media screen and (max-width: 1024px) {
   .sidebar-active{
+    
     transform: translateX(-100%);
   }
   .sidebar-active-rtl{
+    
     transform: translate(100%);
   }
 }

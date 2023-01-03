@@ -29,7 +29,6 @@ export async function getGuilds(token: string): Promise<Guilds> {
         }
     })
     const data: Guilds = res.data
-
     return data
 }
 

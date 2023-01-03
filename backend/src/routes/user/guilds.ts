@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
         
     }catch(err){
         console.log(err)
-        res.status(400).send({msg:'error occured'})
+        res.status(400).send({msg:'error occured', reason:'GUILD_MISSED'})
     }
 })
 
