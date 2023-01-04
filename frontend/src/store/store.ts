@@ -1,11 +1,12 @@
 import { configureStore, Store } from "@reduxjs/toolkit"
-import {userSlice, guildsSlice, guildDashboardSlice, loadingDashboard} from './user/user'
+import {userSlice, guildsSlice, guildDashboardSlice, loadingDashboard,premiumStatusGuilds} from './user/user'
 export const store = configureStore({
     reducer:{
         user: userSlice.reducer,
         guilds: guildsSlice.reducer,
         dashboard: guildDashboardSlice.reducer,
-        loading_dashboard: loadingDashboard.reducer
+        loading_dashboard: loadingDashboard.reducer,
+        premium: premiumStatusGuilds.reducer
     }
 })
 

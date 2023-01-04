@@ -147,6 +147,6 @@ flex: 1 0 auto;
     @media screen and (max-width: 1024px) {
         flex: 1 0 0;
         padding: 0 25px;
-        
+        padding-top: 152px;
 }
 `

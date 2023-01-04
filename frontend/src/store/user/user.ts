@@ -1,9 +1,12 @@
 import { APIUser, APIGuild } from "discord-api-types/v10";
 import { createSlice, CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import { Guilds, StateDashboardI } from '../../utils/constants'
+import { Guilds, PremiumStatus, StateDashboardI, StatePremiumI } from '../../utils/constants'
 
 const initialStateUser: APIUser = null as any
 const initialStateGuild: Guilds = null as any
+const initialStatePremium: StatePremiumI = {
+    guilds: []
+}
 const initialStateDashboard: StateDashboardI = {
     guilds:[]
 }
@@ -51,7 +54,19 @@ export const loadingDashboard = createSlice({
 
 })
 
+export const premiumStatusGuilds = createSlice({
+    name:'premium',
+    initialState: initialStatePremium,
+    reducers:{
+        addPremiumGuilds: (state, action: PayloadAction<StatePremiumI>) => {
+            return action.payload
+        }
+    }
+
+})
+
 export const { addUser } = userSlice.actions
 export const { addGuild } = guildsSlice.actions
 export const { addDashboard } = guildDashboardSlice.actions
 export const { addLoadingDashboard } = loadingDashboard.actions
+export const { addPremiumGuilds } = premiumStatusGuilds.actions

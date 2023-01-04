@@ -46,7 +46,7 @@ router.post("/subscribe", (req, res) => __awaiter(void 0, void 0, void 0, functi
         return yield res
             .status(200)
             .send(`<script>window.opener.postMessage("error", "*"); window.close();</script>`);
-    priceItem = periodTime * 3.99;
+    priceItem = lifetime ? 99.99 : (periodTime * 4 - 0.01);
     endDate.setMonth(endDate.getMonth() + periodTime);
     // paypal start billing
     var create_payment_json = {
@@ -55,8 +55,8 @@ router.post("/subscribe", (req, res) => __awaiter(void 0, void 0, void 0, functi
             payment_method: "paypal",
         },
         redirect_urls: {
-            return_url: `${utils_1.BACKEND_API_URL}/return`,
-            cancel_url: `${utils_1.BACKEND_API_URL}/cancel`,
+            return_url: `${utils_1.BACKEND_API_URL}/api/premium/return`,
+            cancel_url: `${utils_1.BACKEND_API_URL}/api/premium/cancel`,
         },
         transactions: [
             {
@@ -88,8 +88,6 @@ router.post("/subscribe", (req, res) => __awaiter(void 0, void 0, void 0, functi
                 .send(`<script>window.opener.postMessage("error", "*"); window.close();</script>`);
         }
         else {
-            console.log("create payment response");
-            console.log(payment);
             (_a = payment.links) === null || _a === void 0 ? void 0 : _a.forEach((elm) => __awaiter(void 0, void 0, void 0, function* () {
                 if (elm.rel === 'approval_url') {
                     return yield res.send({ link: elm.href, status: "ok" });

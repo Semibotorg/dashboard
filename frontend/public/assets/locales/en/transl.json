@@ -25,5 +25,7 @@
     "lifetime":"Lifetime",
     "subscribe":"Subscribe",
     "most-popular":"Most popular",
-    "pay-paypal":"Pay using paypal"
+    "pay-paypal":"Pay using paypal",
+    "payment-accepted":"Your Payment has been accepted",
+    "payment-declined":"Payment Declined"
 }

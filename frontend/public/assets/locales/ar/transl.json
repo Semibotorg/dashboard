@@ -25,5 +25,7 @@
     "lifetime":"مدى الحياة",
     "subscribe":"اشترك",
     "most-popular":"الأكثر شهرة",
-    "pay-paypal":"ادفع عن طريق بايبال"
+    "pay-paypal":"ادفع عن طريق بايبال",
+    "payment-accepted":"تم قبول دفعتك",
+    "payment-declined":"العملية مرفوضة"
 }

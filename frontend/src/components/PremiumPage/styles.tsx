@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const TitlePage = styled.h1`
 color: white;
-margin-bottom: 100px;
+margin-bottom: 50px;
 font-size: 1.4rem;
 `
 export const Container = styled.div`
@@ -138,8 +138,8 @@ export const PopUp = styled.div`
 export const PopUpInner = styled.div`
         position: relative;
     padding: 32px;
-    width: 60%;
-    max-width: 640px;
+    width: 100%;
+    max-width: 716px;
     background-color: var(--second-theme-color);
     animation:  fadeIn2 .3s ease-out;
     animation-fill-mode: forwards;

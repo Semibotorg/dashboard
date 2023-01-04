@@ -55,7 +55,7 @@ router.post("/subscribe", async (req, res) => {
         `<script>window.opener.postMessage("error", "*"); window.close();</script>`
       );
 
-    priceItem = periodTime * 3.99
+    priceItem = lifetime ? 99.99 : (periodTime * 4 - 0.01)
   endDate.setMonth(endDate.getMonth() + periodTime);
 
 
@@ -66,8 +66,8 @@ router.post("/subscribe", async (req, res) => {
       payment_method: "paypal",
     },
     redirect_urls: {
-      return_url: `${BACKEND_API_URL}/return`,
-      cancel_url: `${BACKEND_API_URL}/cancel`,
+      return_url: `${BACKEND_API_URL}/api/premium/return`,
+      cancel_url: `${BACKEND_API_URL}/api/premium/cancel`,
     },
     transactions: [
       {
@@ -100,8 +100,6 @@ router.post("/subscribe", async (req, res) => {
           `<script>window.opener.postMessage("error", "*"); window.close();</script>`
         );
     } else {
-      console.log("create payment response");
-      console.log(payment);
       payment.links?.forEach(async elm => {
         if(elm.rel === 'approval_url') {
             return await res.send({ link: elm.href, status: "ok" });

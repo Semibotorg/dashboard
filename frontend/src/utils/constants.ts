@@ -60,6 +60,18 @@ export interface Stats{
   usersCount: number
 }
 
+export interface PremiumStatus {
+  active: boolean,
+  daysLeft: number,
+  _id: string,
+  GuildId: string,
+  __v: number,
+  endDate: Date,
+  lifeTime: boolean,
+  paymentId: string,
+  startDate: Date
+}
+
 export interface Guilds {
   included: RESTGetAPICurrentUserGuildsResult,
   excluded: RESTGetAPICurrentUserGuildsResult
@@ -67,4 +79,7 @@ export interface Guilds {
 
 export interface StateDashboardI {
   guilds: APIGuild[]
+}
+export interface StatePremiumI {
+  guilds: PremiumStatus[]
 }
