@@ -48,13 +48,12 @@ router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
         return res.status(200).send({
             active: data.lifeTime ? true : !isExpired(data),
-            daysLeft: daysLeft(data),
+            daysLeft: data.lifeTime ? "lifetime" : daysLeft(data),
             _id: data._id,
             GuildId: data.GuildId,
             __v: data.__v,
             endDate: data.endDate,
             lifeTime: data.lifeTime,
-            paymentId: data.paymentId,
             startDate: data.startDate
         });
     }

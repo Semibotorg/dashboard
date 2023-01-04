@@ -27,5 +27,9 @@
     "most-popular":"Most popular",
     "pay-paypal":"Pay using paypal",
     "payment-accepted":"Your Payment has been accepted",
-    "payment-declined":"Payment Declined"
+    "payment-declined":"Payment Declined",
+    "days":"Days",
+    "expires-in":"Expires in",
+    "server":"Server",
+    "payment-id":"Payment ID"
 }

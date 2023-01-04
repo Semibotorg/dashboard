@@ -17,6 +17,7 @@ import {
   ButtonSubscribe,
   Card,
   Container,
+  ContainerTable,
   Feature,
   FeaturesContainer,
   MostPopularContainer,
@@ -25,7 +26,15 @@ import {
   PopUp,
   PopUpInner,
   PriceInfo,
+  ServerTable,
   SlashText,
+  TableBodyContainer,
+  TableContainer,
+  TableContent,
+  TableContentContainer,
+  TableHead,
+  TableHeadContent,
+  TableHeadContentContainer,
   TextContainer,
   TextPeriod,
   TextPrice,
@@ -34,6 +43,7 @@ import {
 import { t } from "i18next";
 import {Oval as Loader} from "react-loader-spinner";
 import axios from "axios";
+import { CircleImg } from "../GuildPage/styles";
 
 export function PremiumPage() {
   const [popup, setPopUp] = useState({
@@ -123,10 +133,10 @@ GuildId = req.body.guild_id;
     window.addEventListener("message", async (message) => {
       if (message.data == "closed") {
         msg = true;
-        
+        dashboardPageSetup(reduxSelector, dispatch, params, navigate, location, {premium: true});
         console.log("paid!");
         setTimeout(async () => {
-          dashboardPageSetup(reduxSelector, dispatch, params, navigate, location);
+          
           setError(false);
           setLoadingPay(false);
           setPaymentAccepted(true)
@@ -289,11 +299,43 @@ GuildId = req.body.guild_id;
         )}
 
         <TitlePage>{t("premium-title")}</TitlePage>
+        <div className="vertical-line" />
         <BackgroundContent>
           <div>
             <div>
               {
-                premiumRedux?.active ? (null) : (
+                premiumRedux?.active ? (
+                  <ContainerTable>
+                    <TableContainer>
+                    <TableHead>
+                      <TableHeadContentContainer>
+                        <TableHeadContent>{t('server')}:</TableHeadContent>
+                        <TableHeadContent>{t('expires-in')}:</TableHeadContent>
+                        <TableHeadContent>{t('payment-id')}:</TableHeadContent>
+                      </TableHeadContentContainer>
+                    </TableHead>
+                    <TableBodyContainer>
+                      <TableContentContainer>
+                        <TableContent>
+                         <ServerTable>
+                          {
+                            guildRedux.icon ? (<img src={`https://cdn.discordapp.com/icons/${guildRedux.id}/${guildRedux.icon}.png`}/>) : (
+                              <CircleImg>
+                              <span>{guildRedux.name.substring(0, 2)}</span>
+                            </CircleImg>
+                            )
+                          }
+                         
+                          {guildRedux.name}
+                         </ServerTable>
+                          </TableContent>
+                        <TableContent>{premiumRedux.lifeTime ? t('lifetime') : `${premiumRedux.daysLeft} ${t('days')}`}</TableContent>
+                        <TableContent>{premiumRedux._id}</TableContent>
+                      </TableContentContainer>
+                    </TableBodyContainer>
+                  </TableContainer>
+                  </ContainerTable>
+                ) : (
                   <Container>
                 {cards.map((elm) => (
                   <Card

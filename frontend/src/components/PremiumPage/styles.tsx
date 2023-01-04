@@ -96,13 +96,9 @@ transition: all .2s var( --transition);
 }
 `
 export const BackgroundContent = styled.div`
-    background-color: var(--second-theme-color);
-    width: 90%;
-    border: solid 2px var(--hover-second-color);
     padding: 25px;
-    padding-bottom: 100px;
-    padding-top: 100px;
-    border-radius: 25px;
+    padding-bottom: 70px;
+    padding-top: 70px;
 `
 export const MostPopularContainer = styled.div`
 position: relative;
@@ -186,4 +182,46 @@ export const PayBtn = styled.button`
     &:hover{
         background-color: #293f63;
     }
+`
+
+export const ContainerTable = styled.div`
+    overflow: auto !important;
+    white-space: nowrap!important;
+`
+export const TableContainer = styled.table`
+        width: 100%;
+        text-align: center;
+        height: 114px;
+        min-width: 600px;
+        background: var(--hover-second-color);
+        padding: 15px;
+        border-radius: 30px;
+        border: solid 2px var(--hover-second-color);
+
+`
+export const TableHead = styled.thead``
+export const TableHeadContentContainer = styled.tr`
+color: #8192a0;
+font-size: 1.1rem;
+`
+export const TableHeadContent = styled.th``
+export const TableBodyContainer = styled.tbody`
+color: white;
+`
+export const TableContentContainer = styled.tr`
+
+`
+export const TableContent = styled.td`
+`
+export const ServerTable = styled.div`
+    gap: 14px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+img{
+    
+    width: 45px;
+    border-radius: 50px;
+}
 `

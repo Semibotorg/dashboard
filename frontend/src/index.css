@@ -72,6 +72,13 @@ html{
   
   transform: translate(0%);
 }
+.vertical-line{
+  border-style: solid !important;
+  border-color: var(--second-theme-color);
+  border-top-width: 1px!important;
+  width: 95%!important;
+  display: grid!important;
+}
 
 @media screen and (max-width: 1024px) {
   .sidebar-active{

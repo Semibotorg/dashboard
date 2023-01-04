@@ -140,9 +140,9 @@ flex-direction: row;
 `
 
 export const DashboardContent = styled.div`
-overflow: scroll;
+overflow: auto;
 padding-top: 152px;
-flex: 1 0 auto;
+flex: 1 0 0;
 
     @media screen and (max-width: 1024px) {
         flex: 1 0 0;

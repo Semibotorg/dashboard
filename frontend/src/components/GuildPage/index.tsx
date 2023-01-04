@@ -119,7 +119,7 @@ export function GuildPage() {
                 <FirstSectionGuild>
                   {elm.icon ? (
                     <ImgGuild
-                      src={`https://cdn.discordapp.com/icons/${elm.id}/${elm.icon}.jpg`}
+                      src={`https://cdn.discordapp.com/icons/${elm.id}/${elm.icon}.png`}
                     />
                   ) : (
                     <CircleImg>
