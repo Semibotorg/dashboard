@@ -20,4 +20,5 @@ __exportStar(require("./constants"), exports);
 __exportStar(require("./api"), exports);
 __exportStar(require("./jwt"), exports);
 __exportStar(require("./getMatualGuilds"), exports);
+__exportStar(require("./alertsSetup"), exports);
 //# sourceMappingURL=index.js.map

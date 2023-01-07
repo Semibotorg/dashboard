@@ -56,6 +56,7 @@ function createApp() {
             client_id: 'ASgdeCAlq4j66xisRHOLFysw2flfMGQa3G-hrDezDVkKvdkWcIVlks9rp_xsC7BuSy71s9SadNPtxird',
             client_secret: 'EKzMa64bnGhjZ3Xg5nWErjvUiTzfK1JuYIFFzL-p0aVmFkh-3MNjjAxk1JCFuVb2EtUOU0ys4unnEIWp'
         });
+        yield (0, _1.alertsSetup)();
         app.use("/api", routes_1.default);
         return app;
     });

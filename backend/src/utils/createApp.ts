@@ -1,7 +1,7 @@
 import express, { Express, urlencoded } from "express";
 import cors from "cors";
 import routes from "../routes";
-import { connectMongoose } from './'
+import { alertsSetup, connectMongoose } from './'
 import paypal from 'paypal-rest-sdk'
 export async function createApp(): Promise<Express> {
   const app = express();
@@ -19,6 +19,7 @@ export async function createApp(): Promise<Express> {
     client_id: 'ASgdeCAlq4j66xisRHOLFysw2flfMGQa3G-hrDezDVkKvdkWcIVlks9rp_xsC7BuSy71s9SadNPtxird',
     client_secret: 'EKzMa64bnGhjZ3Xg5nWErjvUiTzfK1JuYIFFzL-p0aVmFkh-3MNjjAxk1JCFuVb2EtUOU0ys4unnEIWp'
   })
+  await alertsSetup()
 
   app.use("/api", routes);
   return app;
