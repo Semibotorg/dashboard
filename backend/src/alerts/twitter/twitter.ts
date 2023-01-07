@@ -206,7 +206,7 @@ async function sendNotification(tweet: {
             iconURL: "https://img.icons8.com/color/48/null/twitter--v1.png",
           });
       }
-      const dataC = await alertHistorySchema.findOneAndUpdate({
+       await alertHistorySchema.findOneAndUpdate({
         GuildId: dataB.GuildId
       },{
         $push: {TwitterHistory: tweet.tweetText}

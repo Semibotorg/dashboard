@@ -1,15 +1,16 @@
 import alertsSchema from "../models/alerts";
 import { TwiiterAlert } from '../alerts/twitter/twitter'
+import { TwitchAlert } from "../alerts/twitch/twitch";
 
 export async function alertsSetup(){
         await alertsSchema.findOneAndUpdate({
         GuildId: '863406333894328381'
     },{
-      twitter:{
-        username: ['dagermohamed','elonmusk'],
+      twitch:{
+        username: ['frs9'],
         enabled: true,
-        channelId:'1061163428590403595',
-        message:"@everyone\n{twitter.name} just {twitter.action} here: {twitter.link}!",
+        channelId:'1061193468048838716',
+        message:"@everyone\n{stream.channel} is live on twitch! {stream.link}",
         history:[]
       }
 
@@ -20,6 +21,7 @@ export async function alertsSetup(){
     setInterval(async () => {
         const dataArr = await alertsSchema.find({})
         dataArr.forEach(async (data) => {
+            await TwitchAlert(data)
             await TwiiterAlert(data)
         })
     }, 6000)

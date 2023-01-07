@@ -139,18 +139,17 @@ function sendNotification(tweet, dataB) {
             if (channel) {
                 let message = data.message;
                 if (!message)
-                    return console.log("!message");
+                    return;
                 message = message.replace("{twitter.tweet}", tweet.tweetText);
                 message = message.replace("{twitter.profileImageURL}", tweet.profileImageURL);
                 message = message.replace("{twitter.username}", tweet.profileUsername);
                 message = message.replace("{twitter.name}", tweet.profileName);
                 message = message.replace("{twitter.link}", tweet.tweetLink);
                 message = message.replace("{twitter.action}", tweet.action);
-                console.log("every thing is good now");
                 let titleEmbed = "";
                 tweet.tweetMediaType == "photo" || tweet.tweetMediaType == "video"
                     ? (titleEmbed = `${tweet.profileName} ${tweet.action} a ${tweet.tweetMediaType}`)
-                    : (titleEmbed = `${tweet.profileName} ${tweet.action} a post`);
+                    : (titleEmbed = `${tweet.profileName} ${tweet.action} a status`);
                 let embed = new discord_js_1.EmbedBuilder()
                     .setAuthor({
                     name: `${tweet.profileName} - @${tweet.profileUsername}`,
@@ -209,7 +208,7 @@ function sendNotification(tweet, dataB) {
                         iconURL: "https://img.icons8.com/color/48/null/twitter--v1.png",
                     });
                 }
-                const dataC = yield alertsHistory_1.default.findOneAndUpdate({
+                yield alertsHistory_1.default.findOneAndUpdate({
                     GuildId: dataB.GuildId
                 }, {
                     $push: { TwitterHistory: tweet.tweetText }
@@ -217,7 +216,6 @@ function sendNotification(tweet, dataB) {
                     upsert: true
                 });
                 yield channel.send({ content: message, embeds: [embed] });
-                console.log("done");
             }
         }
     });
