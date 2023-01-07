@@ -36,21 +36,20 @@ function TwitchAlert(dataB) {
         try {
             data === null || data === void 0 ? void 0 : data.username.forEach((username) => __awaiter(this, void 0, void 0, function* () {
                 if (!data || !username)
-                    return console.log('!data || !username');
+                    return;
                 if (!data.enabled)
-                    return console.log('!data.enabled');
+                    return;
                 const twitchUser = yield twitchClient.getUsers(username);
                 if (!twitchUser)
-                    return console.log('!twitchUser');
+                    return;
                 const userId = twitchUser.data[0].id;
                 const twitchStream = yield twitchClient.getStreams({ channel: userId });
                 const stream = twitchStream.data[0];
                 const dataHistory = yield alertsHistory_1.default.findOne({
                     GuildId: dataB.GuildId
                 });
-                console.log(stream);
                 if (!stream)
-                    return console.log('!stream');
+                    return;
                 if (stream) {
                     let message = data.message;
                     const channel = stream.user_name;
@@ -58,12 +57,15 @@ function TwitchAlert(dataB) {
                     const streamTitle = stream.title;
                     const streamGame = stream.game_name;
                     const streamViewerCount = stream.viewer_count;
+                    const twitchGame = (yield twitchClient.getGames(streamGame)).data[0];
+                    let gamePhoto = twitchGame.box_art_url;
+                    gamePhoto = gamePhoto.replace('{width}', '60');
+                    gamePhoto = gamePhoto.replace('{height}', '80');
                     if (!dataHistory)
                         return;
                     const historyFilter = dataHistory === null || dataHistory === void 0 ? void 0 : dataHistory.TwitchHistory.filter(el => el == stream.id);
                     if (historyFilter.length > 0)
-                        return console.log('!historyFilter');
-                    console.log('right now is amazing');
+                        return;
                     message = message.replace('{stream.channel}', channel);
                     message = message.replace('{stream.link}', liveLink);
                     message = message.replace('{stream.title}', streamTitle);
@@ -82,8 +84,12 @@ function TwitchAlert(dataB) {
                         .addFields({
                         name: '**Playing**',
                         value: streamGame
+                    }, {
+                        name: '**Views**',
+                        value: String(streamViewerCount)
                     })
                         .setImage(stream.getThumbnailUrl({ height: 225, width: 400 }))
+                        .setThumbnail(gamePhoto)
                         .setFooter({ text: 'Twitch', iconURL: 'https://img.icons8.com/color/48/null/twitch--v1.png' });
                     const dataC = yield alertsHistory_1.default.findOneAndUpdate({
                         GuildId: dataB.GuildId

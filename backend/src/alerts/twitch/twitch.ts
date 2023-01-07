@@ -22,18 +22,18 @@ export async function TwitchAlert(dataB: Idoc | null){
     const data = dataB?.twitch
     try{
         data?.username.forEach(async(username) => {
-            if(!data || !username) return console.log('!data || !username')
-            if(!data.enabled) return console.log('!data.enabled')
+            if(!data || !username) return 
+            if(!data.enabled) return 
             const twitchUser = await twitchClient.getUsers(username)
-            if(!twitchUser) return console.log('!twitchUser')
+            if(!twitchUser) return 
             const userId = twitchUser.data[0].id
             const twitchStream = await twitchClient.getStreams({channel: userId})
             const stream = twitchStream.data[0]
             const dataHistory = await alertHistorySchema.findOne({
                 GuildId: dataB.GuildId
               })
-            console.log(stream)
-            if(!stream) return console.log('!stream')
+            
+            if(!stream) return 
             if(stream){
                 let message = data.message
                 const channel = stream.user_name
@@ -41,11 +41,16 @@ export async function TwitchAlert(dataB: Idoc | null){
                 const streamTitle = stream.title
                 const streamGame = stream.game_name
                 const streamViewerCount = stream.viewer_count
+                const twitchGame = (await twitchClient.getGames(streamGame)).data[0]
+                let gamePhoto = twitchGame.box_art_url
+                gamePhoto = gamePhoto.replace('{width}', '60')
+                gamePhoto = gamePhoto.replace('{height}', '80')
+                
                 if(!dataHistory) return
                 const historyFilter = dataHistory?.TwitchHistory.filter(el => el == stream.id)
 
-                if(historyFilter.length > 0) return console.log('!historyFilter')
-                console.log('right now is amazing')
+                if(historyFilter.length > 0) return
+                
                 message = message.replace('{stream.channel}', channel)
                 message = message.replace('{stream.link}', liveLink)
                 message = message.replace('{stream.title}', streamTitle)
@@ -67,6 +72,7 @@ export async function TwitchAlert(dataB: Idoc | null){
                     value: streamGame
                 })
                 .setImage(stream.getThumbnailUrl({height: 225, width: 400 }))
+                .setThumbnail(gamePhoto)
                 .setFooter({text:'Twitch', iconURL:'https://img.icons8.com/color/48/null/twitch--v1.png'});
                 const dataC = await alertHistorySchema.findOneAndUpdate({
                     GuildId: dataB.GuildId

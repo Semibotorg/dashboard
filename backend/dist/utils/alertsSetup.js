@@ -22,10 +22,10 @@ function alertsSetup() {
             GuildId: '863406333894328381'
         }, {
             twitch: {
-                username: ['frs9'],
+                username: ['frs9', 'tyrone1mc', 'valorant_kr'],
                 enabled: true,
                 channelId: '1061193468048838716',
-                message: "@everyone\n{stream.channel} is live on twitch! {stream.link}",
+                message: "@everyone\n{stream.channel} is live on twitch! views: {stream.views} - {stream.link}",
                 history: []
             }
         }, {
