@@ -40,7 +40,6 @@ function YoutubeAlert(dataB) {
                     return;
                 if (!data.enabled)
                     return;
-                console.log(username);
                 yield youtube.channels.list({
                     part: ['snippet', 'statistics', 'contentDetails'],
                     id: [username],
@@ -80,7 +79,6 @@ function YoutubeAlert(dataB) {
                         message = message.replace('{youtube.channel}', channelName);
                         message = message.replace('{youtube.link}', videoLink);
                         message = message.replace('{youtube.title}', videoTitle);
-                        console.log('amaaazing');
                         const dataC = yield alertsHistory_1.default.findOneAndUpdate({
                             GuildId: dataB.GuildId
                         }, {

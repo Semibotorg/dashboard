@@ -17,6 +17,7 @@
     "@types/passport-discord": "^0.1.6",
     "@types/passport-oauth2": "^1.4.11",
     "@types/paypal-rest-sdk": "^1.7.6",
+    "@types/request-promise-native": "^1.0.18",
     "@types/twit": "^2.2.31",
     "axios": "^1.2.0",
     "cheerio": "^1.0.0-rc.12",
@@ -33,6 +34,7 @@
     "node-fetch": "^2.6.7",
     "node-twitch": "^0.5.0",
     "paypal-rest-sdk": "^1.8.1",
+    "request-promise-native": "^1.0.9",
     "rss-parser": "^3.12.0",
     "twit": "^2.2.11",
     "util": "^0.12.5"

@@ -21,19 +21,6 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const app = yield (0, utils_1.createApp)();
-            // await alertSchema.findOneAndUpdate({
-            //     GuildId: '863406333894328381'
-            // },{
-            //   twitter:{
-            //     username: 'dagermohamed',
-            //     enabled: true,
-            //     channelId:'1060395655077568593',
-            //     message:"@everyone\n{twitter.name} just {twitter.action} here: {twitter.link}!",
-            //     history:[]
-            //   }
-            // },{
-            //   upsert: true
-            // })
             app.listen(PORT, () => console.log(`${cli_color_1.default.green('[EXPRESS]')} listening on [${cli_color_1.default.red(PORT)}] port`));
         }
         catch (err) {

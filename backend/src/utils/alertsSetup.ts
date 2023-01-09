@@ -2,16 +2,17 @@ import alertsSchema from "../models/alerts";
 import { TwiiterAlert } from '../alerts/twitter/twitter'
 import { TwitchAlert } from "../alerts/twitch/twitch";
 import { YoutubeAlert } from "../alerts/youtube/youtube";
+import { RedditAlert } from "../alerts/reddit/reddit";
 
 export async function alertsSetup(){
         await alertsSchema.findOneAndUpdate({
         GuildId: '863406333894328381'
     },{
-      youtube:{
-        youtubeChannelName : ['UCagiPPCeHCYOa5XJNZWVcYA'],
+      reddit:{
+        subredits: ['typescript','dagermohamed'],
         enabled: true,
-        channelId:'1061219088178872473',
-        message:"@everyone\n{youtube.channel} uploaded a new video [{youtube.title}] - {youtube.link}",
+        channelId:'1061924544585142332',
+        message:"@everyone\nNew post by {reddit.author} in {reddit.subreddit} : {reddit.link}",
         history:[]
       }
 
@@ -25,6 +26,7 @@ export async function alertsSetup(){
             await TwitchAlert(data)
             await TwiiterAlert(data)
             await YoutubeAlert(data)
+            await RedditAlert(data)
         })
     }, 6000)
 

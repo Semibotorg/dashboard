@@ -32,7 +32,7 @@ export interface Idoc extends mongoose.Document {
   };
   reddit?: {
     enabled: boolean;
-    username: string[];
+    subredits: string[];
     message: string;
     channelId: string;
     history: string[];

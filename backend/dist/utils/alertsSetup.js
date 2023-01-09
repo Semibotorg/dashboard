@@ -17,16 +17,17 @@ const alerts_1 = __importDefault(require("../models/alerts"));
 const twitter_1 = require("../alerts/twitter/twitter");
 const twitch_1 = require("../alerts/twitch/twitch");
 const youtube_1 = require("../alerts/youtube/youtube");
+const reddit_1 = require("../alerts/reddit/reddit");
 function alertsSetup() {
     return __awaiter(this, void 0, void 0, function* () {
         yield alerts_1.default.findOneAndUpdate({
             GuildId: '863406333894328381'
         }, {
-            youtube: {
-                youtubeChannelName: ['UCagiPPCeHCYOa5XJNZWVcYA'],
+            reddit: {
+                subredits: ['typescript', 'dagermohamed'],
                 enabled: true,
-                channelId: '1061219088178872473',
-                message: "@everyone\n{youtube.channel} uploaded a new video [{youtube.title}] - {youtube.link}",
+                channelId: '1061924544585142332',
+                message: "@everyone\nNew post by {reddit.author} in {reddit.subreddit} : {reddit.link}",
                 history: []
             }
         }, {
@@ -38,6 +39,7 @@ function alertsSetup() {
                 yield (0, twitch_1.TwitchAlert)(data);
                 yield (0, twitter_1.TwiiterAlert)(data);
                 yield (0, youtube_1.YoutubeAlert)(data);
+                yield (0, reddit_1.RedditAlert)(data);
             }));
         }), 6000);
     });
