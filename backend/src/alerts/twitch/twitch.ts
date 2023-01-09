@@ -57,7 +57,7 @@ export async function TwitchAlert(dataB: Idoc | null){
                 message = message.replace('{stream.game}', streamGame)
                 message = message.replace('{stream.views}', String(streamViewerCount))
                 const channelDiscord: any = await client.channels.fetch(data.channelId);
-
+                if(!channelDiscord) return
                 const embed = new EmbedBuilder()
                 .setAuthor({
                     name: twitchUser.data[0].display_name,
@@ -67,6 +67,7 @@ export async function TwitchAlert(dataB: Idoc | null){
                 .setTitle(streamTitle)
                 .setURL(liveLink)
                 .setDescription(`${twitchUser.data[0].display_name} is now live on Twitch!`)
+                .setTimestamp()
                 .addFields({
                     name: '**Playing**',
                     value: streamGame

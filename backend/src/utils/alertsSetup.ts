@@ -1,16 +1,17 @@
 import alertsSchema from "../models/alerts";
 import { TwiiterAlert } from '../alerts/twitter/twitter'
 import { TwitchAlert } from "../alerts/twitch/twitch";
+import { YoutubeAlert } from "../alerts/youtube/youtube";
 
 export async function alertsSetup(){
         await alertsSchema.findOneAndUpdate({
         GuildId: '863406333894328381'
     },{
-      twitch:{
-        username: ['frs9','tyrone1mc','valorant_kr'],
+      youtube:{
+        youtubeChannelName : ['UCagiPPCeHCYOa5XJNZWVcYA'],
         enabled: true,
-        channelId:'1061193468048838716',
-        message:"@everyone\n{stream.channel} is live on twitch! views: {stream.views} - {stream.link}",
+        channelId:'1061219088178872473',
+        message:"@everyone\n{youtube.channel} uploaded a new video [{youtube.title}] - {youtube.link}",
         history:[]
       }
 
@@ -23,6 +24,7 @@ export async function alertsSetup(){
         dataArr.forEach(async (data) => {
             await TwitchAlert(data)
             await TwiiterAlert(data)
+            await YoutubeAlert(data)
         })
     }, 6000)
 

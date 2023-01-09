@@ -155,6 +155,7 @@ async function sendNotification(tweet: {
         .setURL(tweet.tweetLink)
         .setThumbnail(tweet.profileImageURL)
         .setDescription(tweet.tweetText)
+        .setTimestamp()
         .setColor('00aced' as any)
         .setFooter({
           text: "Twitter",
@@ -174,6 +175,7 @@ async function sendNotification(tweet: {
           .setThumbnail(tweet.profileImageURL)
           .setURL(tweet.tweetLink)
           .setColor('00aced' as any)
+          .setTimestamp()
           .setDescription(tweet.tweetText)
           .setImage(tweet.tweetPhotoLink)
           .setFooter({
@@ -195,6 +197,7 @@ async function sendNotification(tweet: {
           .setURL(tweet.tweetLink)
           .setThumbnail(tweet.profileImageURL)
           .setColor('00aced' as any)
+          .setTimestamp()
           .setDescription(tweet.tweetText)
           .addFields({
             name: "**Video duration**",

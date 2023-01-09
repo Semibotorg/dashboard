@@ -160,6 +160,7 @@ function sendNotification(tweet, dataB) {
                     .setURL(tweet.tweetLink)
                     .setThumbnail(tweet.profileImageURL)
                     .setDescription(tweet.tweetText)
+                    .setTimestamp()
                     .setColor('00aced')
                     .setFooter({
                     text: "Twitter",
@@ -177,6 +178,7 @@ function sendNotification(tweet, dataB) {
                         .setThumbnail(tweet.profileImageURL)
                         .setURL(tweet.tweetLink)
                         .setColor('00aced')
+                        .setTimestamp()
                         .setDescription(tweet.tweetText)
                         .setImage(tweet.tweetPhotoLink)
                         .setFooter({
@@ -197,6 +199,7 @@ function sendNotification(tweet, dataB) {
                         .setURL(tweet.tweetLink)
                         .setThumbnail(tweet.profileImageURL)
                         .setColor('00aced')
+                        .setTimestamp()
                         .setDescription(tweet.tweetText)
                         .addFields({
                         name: "**Video duration**",

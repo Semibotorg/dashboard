@@ -72,6 +72,8 @@ function TwitchAlert(dataB) {
                     message = message.replace('{stream.game}', streamGame);
                     message = message.replace('{stream.views}', String(streamViewerCount));
                     const channelDiscord = yield bot_1.client.channels.fetch(data.channelId);
+                    if (!channelDiscord)
+                        return;
                     const embed = new discord_js_1.EmbedBuilder()
                         .setAuthor({
                         name: twitchUser.data[0].display_name,
@@ -81,12 +83,10 @@ function TwitchAlert(dataB) {
                         .setTitle(streamTitle)
                         .setURL(liveLink)
                         .setDescription(`${twitchUser.data[0].display_name} is now live on Twitch!`)
+                        .setTimestamp()
                         .addFields({
                         name: '**Playing**',
                         value: streamGame
-                    }, {
-                        name: '**Views**',
-                        value: String(streamViewerCount)
                     })
                         .setImage(stream.getThumbnailUrl({ height: 225, width: 400 }))
                         .setThumbnail(gamePhoto)
