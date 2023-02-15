@@ -18,15 +18,11 @@ const v10_1 = require("discord-api-types/v10");
 const index_1 = require("../../bot/index");
 const premium_1 = __importDefault(require("../../models/premium"));
 const router = (0, express_1.Router)();
-function isExpired(date) {
-    const currentDate = new Date();
-    return currentDate >= date.endDate;
-}
 function daysLeft(date) {
     const currentDate = new Date();
     const endDate = new Date(date.endDate);
-    const timeDiff = endDate.getTime() - currentDate.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+    const timeDiff = (endDate.getTime() - currentDate.getTime());
+    return Math.ceil(timeDiff / (1000 * 3600 * 24) + 2);
 }
 router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { authorization } = req.headers;
@@ -47,7 +43,7 @@ router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(500).send({ error: `Can't find data` });
         }
         return res.status(200).send({
-            active: data.lifeTime ? true : !isExpired(data),
+            active: data.lifeTime ? true : !(0, utils_1.isExpired)(data),
             daysLeft: data.lifeTime ? "lifetime" : daysLeft(data),
             _id: data._id,
             GuildId: data.GuildId,

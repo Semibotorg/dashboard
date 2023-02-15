@@ -1,10 +1,5 @@
 import styled from "styled-components";
 
-export const TitlePage = styled.h1`
-color: white;
-margin-bottom: 50px;
-font-size: 1.4rem;
-`
 export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
@@ -98,7 +93,6 @@ transition: all .2s var( --transition);
 export const BackgroundContent = styled.div`
     padding: 25px;
     padding-bottom: 70px;
-    padding-top: 70px;
 `
 export const MostPopularContainer = styled.div`
 position: relative;
@@ -149,6 +143,9 @@ export const PopUpInner = styled.div`
     font-size: 26px;
     color: white;
     cursor: pointer;
+    }
+    @media screen and (max-width: 1024px) {
+        max-width: 100%;
     }
 `
 export const PriceInfo = styled.div`

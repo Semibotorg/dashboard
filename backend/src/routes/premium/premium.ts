@@ -8,7 +8,7 @@ import {
   getUserGuilds,
   getBotGuilds,
   getMatualGuilds,
-  RUST_API_URL,
+  
   getGuild,
   BACKEND_API_URL,
 } from "../../utils";
@@ -159,7 +159,7 @@ router.get("/cancel", async (req, res) => {
     .send(
       `<script>window.opener.postMessage("error", "*"); window.close();</script>`
     );
-});
+})
 
 router.use('/status', premiumStatusRouter)
 

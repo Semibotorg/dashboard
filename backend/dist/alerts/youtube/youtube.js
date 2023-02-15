@@ -27,13 +27,13 @@ function YoutubeAlert(dataB) {
     return __awaiter(this, void 0, void 0, function* () {
         const parser = new rss_parser_1.default();
         const youtube = googleapis_1.google.youtube({
-            version: 'v3',
+            version: "v3",
             auth: YOUTUBE_API_KEY,
         });
         const data = dataB === null || dataB === void 0 ? void 0 : dataB.youtube;
         try {
             const dataHistory = yield alertsHistory_1.default.findOne({
-                GuildId: dataB === null || dataB === void 0 ? void 0 : dataB.GuildId
+                GuildId: dataB === null || dataB === void 0 ? void 0 : dataB.GuildId,
             });
             data === null || data === void 0 ? void 0 : data.youtubeChannelName.forEach((username) => __awaiter(this, void 0, void 0, function* () {
                 if (!data || !username)
@@ -41,7 +41,7 @@ function YoutubeAlert(dataB) {
                 if (!data.enabled)
                     return;
                 yield youtube.channels.list({
-                    part: ['snippet', 'statistics', 'contentDetails'],
+                    part: ["snippet", "statistics", "contentDetails"],
                     id: [username],
                 }, (err, res) => __awaiter(this, void 0, void 0, function* () {
                     var _a, _b, _c, _d;
@@ -64,27 +64,27 @@ function YoutubeAlert(dataB) {
                             return;
                         const videoLink = video.link;
                         const videoTitle = video.title;
-                        const videoId = video.id.split(':')[2];
+                        const videoId = video.id.split(":")[2];
                         const youtubeLogo = "https://img.icons8.com/color/48/null/youtube-play.png";
                         const videoThumbnail = `http://i1.ytimg.com/vi/${videoId}/hqdefault.jpg`;
                         if (!dataHistory)
                             return;
-                        const historyFilter = dataHistory === null || dataHistory === void 0 ? void 0 : dataHistory.YoutubeHistory.filter(el => el == videoId);
+                        const historyFilter = dataHistory === null || dataHistory === void 0 ? void 0 : dataHistory.YoutubeHistory.filter((el) => el == videoId);
                         if (historyFilter.length > 0)
                             return;
                         const channelDiscord = yield bot_1.client.channels.fetch(data.channelId);
                         if (!channelDiscord)
                             return;
                         let message = data.message;
-                        message = message.replace('{youtube.channel}', channelName);
-                        message = message.replace('{youtube.link}', videoLink);
-                        message = message.replace('{youtube.title}', videoTitle);
+                        message = message.replace("{youtube.channel}", channelName);
+                        message = message.replace("{youtube.link}", videoLink);
+                        message = message.replace("{youtube.title}", videoTitle);
                         const dataC = yield alertsHistory_1.default.findOneAndUpdate({
-                            GuildId: dataB.GuildId
+                            GuildId: dataB.GuildId,
                         }, {
-                            $push: { YoutubeHistory: videoId }
+                            $push: { YoutubeHistory: videoId },
                         }, {
-                            upsert: true
+                            upsert: true,
                         });
                         yield channelDiscord.send({ content: message });
                     }

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import fetch from 'node-fetch'
-import { DISCORD_API_URL, DISCORD_API_VERSION, decodeJWT, getUser, getUserGuilds, getBotGuilds, getMatualGuilds, RUST_API_URL, getGuild } from '../../utils'
+import { DISCORD_API_URL, DISCORD_API_VERSION, decodeJWT, getUser, getUserGuilds, getBotGuilds, getMatualGuilds, getGuild } from '../../utils'
 import { Routes, PermissionFlagsBits } from 'discord-api-types/v10'
 import {client} from '../../bot/index'
 

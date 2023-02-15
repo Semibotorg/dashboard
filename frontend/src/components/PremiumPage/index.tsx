@@ -38,12 +38,13 @@ import {
   TextContainer,
   TextPeriod,
   TextPrice,
-  TitlePage,
+  
 } from "./styles";
 import { t } from "i18next";
 import {Oval as Loader} from "react-loader-spinner";
 import axios from "axios";
 import { CircleImg } from "../GuildPage/styles";
+import { TitlePage } from "../Sidebar/styles";
 
 export function PremiumPage() {
   const [popup, setPopUp] = useState({
@@ -298,8 +299,7 @@ GuildId = req.body.guild_id;
           </PopUp>
         )}
 
-        <TitlePage>{t("premium-title")}</TitlePage>
-        <div className="vertical-line" />
+
         <BackgroundContent>
           <div>
             <div>

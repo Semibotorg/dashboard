@@ -6,3 +6,4 @@ export * from "./NavbarSidebar";
 export * from "./PremiumPage";
 export * from './DashboardPage'
 export * from './SettingsPage'
+export * from './TwitchPage'

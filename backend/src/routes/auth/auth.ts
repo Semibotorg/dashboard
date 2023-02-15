@@ -39,7 +39,7 @@ router.get('/callback', async (req, res) => {
             user: userResponse,
             token_type: tokenResponse.token_type
         },process.env.JWT_PASSWORD as string)
-    
+        
         res
         .status(200)
         .send(

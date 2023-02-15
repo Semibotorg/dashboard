@@ -41,6 +41,10 @@ const T = new twit_1.default({
 function TwiiterAlert(dataB) {
     return __awaiter(this, void 0, void 0, function* () {
         const data = dataB === null || dataB === void 0 ? void 0 : dataB.twitter;
+        const rr = yield T.get("/users/lookup", {
+            screen_name: 'elonmusk'
+        });
+        console.log(rr.data);
         try {
             data === null || data === void 0 ? void 0 : data.username.forEach((username) => __awaiter(this, void 0, void 0, function* () {
                 if (!data || !username)
@@ -187,8 +191,7 @@ function sendNotification(tweet, dataB) {
                     });
                 }
                 else if (tweet.tweetMediaType == "video" &&
-                    tweet.tweetPhotoLink.length != 0 &&
-                    tweet.videoDuration.length != 0) {
+                    tweet.tweetPhotoLink.length != 0) {
                     embed = new discord_js_1.EmbedBuilder()
                         .setAuthor({
                         name: `${tweet.profileName} - @${tweet.profileUsername}`,

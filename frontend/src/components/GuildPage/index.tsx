@@ -22,6 +22,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
 import { Navbar } from "../Navbar";
+import { Footer } from "../Home/Footer";
 export function GuildPage() {
   const { t } = useTranslation();
   // const [guilds, setGuilds] = useState<Guilds | null>(null);
@@ -133,7 +134,9 @@ export function GuildPage() {
               </Guild>
             ))}
         </GuildsContainer>
+        
       </Content>
+      
     </div>
   );
 }

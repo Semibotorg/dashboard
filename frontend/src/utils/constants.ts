@@ -52,6 +52,13 @@ export const features = [
     description:'mod-f-d',
     img:testingIMG
     
+  },
+  {
+    icon: 'fa-solid fa-message',
+    text: 'mod-f',
+    description:'mod-f-d',
+    img:testingIMG
+    
   }
 ]
 

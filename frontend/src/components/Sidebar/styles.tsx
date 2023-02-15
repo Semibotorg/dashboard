@@ -2,7 +2,10 @@ import i18next from "i18next";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const Sidebar = styled.div`
-
+overflow: auto;
+::-webkit-scrollbar{
+  display: none;
+}
 position: relative;
 height: 100%;
 min-height: 100vh;
@@ -17,7 +20,11 @@ border-right: 1px solid var(--btn-color-hover);
 }
 transition: all .2s var(--transition);
 `
-
+export const TitlePage = styled.h1`
+color: white;
+margin-bottom: 30px;
+font-size: 1.4rem;
+`
 
 export const Content = styled.div`
   overflow: hidden;
@@ -26,6 +33,7 @@ export const Content = styled.div`
 export const SidebarContainer = styled.div`
   display: flex;
   height: 100%;
+  
   gap: 54px;
 
 `
@@ -33,6 +41,7 @@ export const SidebarContent = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px 32px 32px;
+    
     grid-gap: 24px;
 `
 
@@ -113,6 +122,9 @@ export const SidebarElement = styled(Link)`
         color: white;
         background: var(--sidebar-btn-hover);
     }
+    i{
+      font-size: 20px;
+    }
 `
 
 export const SidebarMenuHeader = styled.div`
@@ -122,7 +134,7 @@ color: white;
 user-select: none;
 align-items: center;
 justify-content: space-between;
-max-width: 90%;
+max-width: 95%;
 cursor: pointer;
 transition: all .2s var(--transition);
 flex-direction: row;
@@ -148,5 +160,18 @@ flex: 1 0 0;
         flex: 1 0 0;
         padding: 0 25px;
         padding-top: 152px;
+}
+`
+
+export const PremiumContainer = styled.div`
+text-align: center;
+display: flex !important;
+align-items: center;
+width: 100%;
+justify-content: space-between;
+flex: 1 1 !important;
+i{
+  font-size: 17px;
+  color: #fce66a;
 }
 `

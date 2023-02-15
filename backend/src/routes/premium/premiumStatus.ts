@@ -8,26 +8,21 @@ import {
   getUserGuilds,
   getBotGuilds,
   getMatualGuilds,
-  RUST_API_URL,
   getGuild,
   BACKEND_API_URL,
+  isExpired
 } from "../../utils";
-import { Routes, PermissionFlagsBits } from "discord-api-types/v10";
+import { PermissionFlagsBits } from "discord-api-types/v10";
 import { client } from "../../bot/index";
-import paypal from "paypal-rest-sdk";
 import premiumSchema from '../../models/premium'
-import premium from "../../models/premium";
+
 const router = Router();
 
-function isExpired(date: any){
-    const currentDate = new Date()
-    return currentDate >= date.endDate
-}
 function daysLeft(date: any){
     const currentDate = new Date();
     const endDate = new Date(date.endDate);
-    const timeDiff = endDate.getTime() - currentDate.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+    const timeDiff = (endDate.getTime() - currentDate.getTime());
+    return Math.ceil(timeDiff / (1000 * 3600 * 24) + 2);
 }
 
 router.get('/:id', async (req, res) => {

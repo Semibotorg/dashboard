@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavbarSidebar, PremiumPage, SettingsPage } from "..";
+import { NavbarSidebar, PremiumPage, SettingsPage, TwitchPage } from "..";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import {
@@ -21,6 +21,8 @@ import {
   LogoHeaderSidebar,
   DashboardContent,
   SidebarContainer,
+  PremiumContainer,
+  TitlePage
 } from "./styles";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/semibot.png";
@@ -29,15 +31,17 @@ import {
   Cog6ToothIcon,
   ChevronDownIcon,
   ShoppingCartIcon,
+  
 } from "@heroicons/react/24/outline";
 import { useParams, useLocation } from "react-router-dom";
 import i18next from "i18next";
 import { DashboardPage } from "../";
 import { dashboardPageSetup } from "../../utils/functions";
 
+
 interface SidebarI {
   serverControl: boolean;
-  serverControl2: boolean;
+  alerts: boolean;
 }
 
 export function SidebarPage(): JSX.Element{
@@ -50,9 +54,10 @@ export function SidebarPage(): JSX.Element{
   const params = useParams();
   const userRedux = useSelector((state: RootState) => state.user);
   const guildRedux = useSelector((state: RootState) => state.dashboard.guilds.filter(el => el.id == params.id))[0];
+  const premiumRedux = useSelector((state: RootState) => state.premium.guilds.filter((el) => el.GuildId == params.id)[0]);
   const [sidebar, setSidebar] = useState<SidebarI | any>({
     serverControl: true,
-    serverControl2: true,
+    alerts: true,
   });
   const [loading, setLoading] = useState<boolean>(true);
   const [sidebarToggle, setSidebarToggle] = useState<boolean>(false);
@@ -69,16 +74,16 @@ export function SidebarPage(): JSX.Element{
   },[])
 
   const { t } = useTranslation();
-  const setToggle = (state: "serverControl" | "serverControl2") => {
+  const setToggle = (state: keyof SidebarI) => {
     if (state === "serverControl") {
       setSidebar({
         ...sidebar,
         serverControl: !sidebar.serverControl,
       });
-    } else if (state === "serverControl2") {
+    } else if (state === "alerts") {
       setSidebar({
         ...sidebar,
-        serverControl2: !sidebar.serverControl2,
+        alerts: !sidebar.alerts,
       });
     }
   };
@@ -91,18 +96,62 @@ export function SidebarPage(): JSX.Element{
         {
           text: t("dashboard"),
           icon: HomeIcon,
+          brand: '',
           link: "",
+          premium: false
         },
         {
           text: t("settings"),
           icon: Cog6ToothIcon,
+          brand: '',
           link: "/settings",
+          premium: false
         },
         {
           text: t("premium"),
           icon: ShoppingCartIcon,
+          brand: '',
           link: "/premium",
+          premium: false
+          
         },
+      ],
+    },
+    {
+      header: t("auto-alerts"),
+      state: sidebar,
+      stateText: "alerts",
+      elements: [
+        {
+          text: t("twitch"),
+          icon: null,
+          brand: 'twitch',
+          link: "/twitch",
+          premium: true
+        },
+        {
+          text: t("twitter"),
+          icon: null,
+          brand: 'twitter',
+          link: "/twitter",
+          premium: true
+        },
+        {
+          text: t("reddit"),
+          icon: null,
+          brand: 'reddit',
+          link: "/reddit",
+          premium: true
+        },
+        {
+          text: t("youtube"),
+          icon: null,
+          brand: 'youtube',
+          link: "/youtube",
+          premium: true
+        },
+        
+        
       ],
     },
   ];
@@ -111,15 +160,38 @@ export function SidebarPage(): JSX.Element{
     {
       link: "/premium",
       content: PremiumPage,
+      title: t('premium-title')
     },
     {
       link: "",
       content: DashboardPage,
+      title: t('dashboard')
     },
     {
       link : '/settings',
-      content: SettingsPage
-    }
+      content: SettingsPage,
+      title: t('settings')
+    },
+    {
+      link : '/twitch',
+      content:  premiumRedux ? premiumRedux.active || premiumRedux.lifeTime ? TwitchPage : PremiumPage : PremiumPage,
+      title: t('twitch-autoalert')
+    },
+    {
+      link : '/twitter',
+      content:  premiumRedux ? premiumRedux.active || premiumRedux.lifeTime ? TwitchPage : PremiumPage : PremiumPage,
+      title: t('twitter-autoalert')
+    },
+    {
+      link : '/reddit',
+      content:  premiumRedux ? premiumRedux.active || premiumRedux.lifeTime ? TwitchPage : PremiumPage : PremiumPage,
+      title: t('reddit-autoalert')
+    },
+    {
+      link : '/youtube',
+      content:  premiumRedux ? premiumRedux.active || premiumRedux.lifeTime ? TwitchPage : PremiumPage : PremiumPage,
+      title: t('youtube-autoalert')
+    },
   ];
   return (
     
@@ -195,8 +267,16 @@ export function SidebarPage(): JSX.Element{
                                 : {}
                             }
                           >
-                            <elm.icon width={22} />
-                            {elm.text}
+                            {
+                              elm.brand.length > 0 ? <i className={`fa-brands fa-${elm.brand}`}></i> : elm.icon != null && <elm.icon width={22} />
+                            }
+                            
+                            {
+                              elm.premium ? (<PremiumContainer>
+                                <span>{elm.text}</span>
+                                <i className="fa-sharp fa-solid fa-crown"></i>
+                                </PremiumContainer>) : (elm.text)
+                            }
                           </SidebarElement>
                         ))}
                       </div>
@@ -213,7 +293,11 @@ export function SidebarPage(): JSX.Element{
               {dashboardContents.map((elm) => {
                 return (
                   location.pathname == `/dashboard/${params.id}${elm.link}` && (
+                    <>
+                            <TitlePage>{elm.title}</TitlePage>
+        <div className="vertical-line" />
                     <elm.content />
+                    </>
                   )
                 );
               })}

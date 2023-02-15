@@ -3,6 +3,10 @@
 :root{
   --theme-color: #171a2e;
   --second-theme-color: #1d213a;
+  --textinput-border-color: #282d4e;
+  --textinput-border-hover-color: #3d317e;
+  --select-border-hover-color: #1d213a;
+  --textinput-bg-color: #1a1d33;
   --hover-second-color: #282e4ea1;
   --btn-discord-color: #7358f9;
   --btn-discord-hover: #795eff8a;
@@ -78,6 +82,7 @@ html{
   border-top-width: 1px!important;
   width: 95%!important;
   display: grid!important;
+  margin-bottom: 50px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -90,3 +95,43 @@ html{
     transform: translate(100%);
   }
 }
+
+.react-select .react-select__single-value{
+  color: white;
+  transition: .2s all var(--transition) !important;
+  }
+  .react-select .react-select__input-container{
+    transition: .2s all var(--transition) !important;
+    color: white;
+
+    }
+  .react-select .react-select__option{
+  background-color: var(--textinput-bg-color);
+  display: flex;
+  height: 40px;
+  
+  align-items: center;
+  border: solid 2px transparent;
+  margin-left: 5px;
+  width: 100% !important;
+  max-width: 98% !important;
+  border-radius: 10px;
+  transition: .2s all var(--transition) !important;
+  cursor: pointer;
+  }
+  
+  .react-select .react-select__option:hover{
+  background-color: var(--select-border-hover-color);
+  }
+  .react-select .react-select__menu{
+    transition: .2s all var(--transition) !important;
+  background-color: var(--textinput-bg-color);
+  color: white !important;
+  padding: 2px;
+  transition: .2s all var(--transition) !important;
+  }
+  .react-select .react-select__menu-list{
+    font-weight: 500;
+    overflow-x: hidden;
+    transition: .2s all var(--transition) !important;
+    }

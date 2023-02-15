@@ -31,5 +31,14 @@
     "days":"يوم",
     "expires-in":"ينتهي في",
     "server":"السيرفر",
-    "payment-id":"ايدي الدفعة"
+    "payment-id":"ايدي الدفعة",
+    "auto-alerts":"الاشعارات التلقائية",
+    "twitch":"تويتش",
+    "reddit":"ريديت",
+    "twitter":"تويتر",
+    "youtube":"يوتيوب",
+    "twitch-autoalert":"اشعار تويتش",
+    "reddit-autoalert":"اشعار ريديت",
+    "twitter-autoalert":"اشعار تويتر",
+    "youtube-autoalert":"اشعار يوتيوب"
 }

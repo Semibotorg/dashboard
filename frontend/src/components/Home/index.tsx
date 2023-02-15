@@ -35,6 +35,8 @@ import { APIUser } from "discord-api-types/v10";
 import { Oval } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { Navbar } from "../Navbar";
+import { Loading } from "@nextui-org/react"
+import { Footer } from "./Footer";
 export function Homepage() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -95,12 +97,13 @@ export function Homepage() {
       <Navbar />
       {loading ? (
         <LoaderContainer>
-          <Oval
+          {/* <Oval
             color="#00BFFF"
             secondaryColor="#72638b"
             height={30}
             width={30}
-          />
+          /> */}
+          <Loading/>
         </LoaderContainer>
       ) : (
         <div>
@@ -160,8 +163,12 @@ export function Homepage() {
               </Stats>
             </StatsContainer>
           </ThirdSection>{" "}
+
+          <Footer />
         </div>
+        
       )}
+
     </div>
   );
 }

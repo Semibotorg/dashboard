@@ -24,6 +24,7 @@ export async function TwitchAlert(dataB: Idoc | null){
         data?.username.forEach(async(username) => {
             if(!data || !username) return 
             if(!data.enabled) return 
+            
             const twitchUser = await twitchClient.getUsers(username)
             if(!twitchUser) return 
             const userId = twitchUser.data[0].id
@@ -68,6 +69,7 @@ export async function TwitchAlert(dataB: Idoc | null){
                 .setURL(liveLink)
                 .setDescription(`${twitchUser.data[0].display_name} is now live on Twitch!`)
                 .setTimestamp()
+                .setColor('5c16c5' as any)
                 .addFields({
                     name: '**Playing**',
                     value: streamGame

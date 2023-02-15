@@ -31,7 +31,6 @@ const T = new Twit({
 });
 export async function TwiiterAlert(dataB: Idoc | null) {
   const data = dataB?.twitter;
-
   try {
     data?.username.forEach(async (username) => {
       if (!data || !username) return;
@@ -184,8 +183,7 @@ async function sendNotification(tweet: {
           });
       } else if (
         tweet.tweetMediaType == "video" &&
-        tweet.tweetPhotoLink.length != 0 &&
-        tweet.videoDuration.length != 0
+        tweet.tweetPhotoLink.length != 0
       ) {
         embed = new EmbedBuilder()
         .setAuthor({

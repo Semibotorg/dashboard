@@ -27,6 +27,10 @@ function RedditAlert(dataB) {
         const data = dataB === null || dataB === void 0 ? void 0 : dataB.reddit;
         data === null || data === void 0 ? void 0 : data.subredits.forEach((subreddit) => __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!data || !subreddit)
+                    return;
+                if (!data.enabled)
+                    return;
                 const dataHistory = yield alertsHistory_1.default.findOne({
                     GuildId: dataB === null || dataB === void 0 ? void 0 : dataB.GuildId
                 });
@@ -80,6 +84,7 @@ function RedditAlert(dataB) {
                     url: `https://www.reddit.com/user/${author}`
                 })
                     .setTitle(title)
+                    .setColor('ff4500')
                     .setURL(link)
                     .setDescription(`${author} posted in ${subredditName}`)
                     .setFooter({ text: 'Reddit', iconURL: 'https://i.imgur.com/ref0iBx_d.webp' })

@@ -84,6 +84,7 @@ function TwitchAlert(dataB) {
                         .setURL(liveLink)
                         .setDescription(`${twitchUser.data[0].display_name} is now live on Twitch!`)
                         .setTimestamp()
+                        .setColor('5c16c5')
                         .addFields({
                         name: '**Playing**',
                         value: streamGame

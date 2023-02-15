@@ -18,29 +18,43 @@ const twitter_1 = require("../alerts/twitter/twitter");
 const twitch_1 = require("../alerts/twitch/twitch");
 const youtube_1 = require("../alerts/youtube/youtube");
 const reddit_1 = require("../alerts/reddit/reddit");
+const premium_1 = __importDefault(require("../models/premium"));
+const constants_1 = require("./constants");
 function alertsSetup() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield alerts_1.default.findOneAndUpdate({
-            GuildId: '863406333894328381'
-        }, {
-            reddit: {
-                subredits: ['typescript', 'dagermohamed'],
-                enabled: true,
-                channelId: '1061924544585142332',
-                message: "@everyone\nNew post by {reddit.author} in {reddit.subreddit} : {reddit.link}",
-                history: []
-            }
-        }, {
-            upsert: true
-        });
+        //     await alertsSchema.findOneAndUpdate({
+        //     GuildId: '863406333894328381'
+        // },{
+        //   reddit:{
+        //     subredits: ['typescript','dagermohamed'],
+        //     enabled: true,
+        //     channelId:'1061924544585142332',
+        //     message:"@everyone\nNew post by {reddit.author} in {reddit.subreddit} : {reddit.link}",
+        //     history:[]
+        //   }
+        // },{
+        //   upsert: true
+        // })
         setInterval(() => __awaiter(this, void 0, void 0, function* () {
-            const dataArr = yield alerts_1.default.find({});
-            dataArr.forEach((data) => __awaiter(this, void 0, void 0, function* () {
-                yield (0, twitch_1.TwitchAlert)(data);
-                yield (0, twitter_1.TwiiterAlert)(data);
-                yield (0, youtube_1.YoutubeAlert)(data);
-                yield (0, reddit_1.RedditAlert)(data);
-            }));
+            try {
+                const dataArr = yield alerts_1.default.find({});
+                dataArr.forEach((data) => __awaiter(this, void 0, void 0, function* () {
+                    const dataPremium = yield premium_1.default.findOne({ GuildId: data.GuildId });
+                    if (!dataPremium)
+                        return;
+                    if ((0, constants_1.isExpired)(dataPremium) == false || dataPremium.lifeTime == true) {
+                        yield (0, twitch_1.TwitchAlert)(data);
+                        yield (0, twitter_1.TwiiterAlert)(data);
+                        yield (0, youtube_1.YoutubeAlert)(data);
+                        yield (0, reddit_1.RedditAlert)(data);
+                    }
+                    else
+                        return;
+                }));
+            }
+            catch (err) {
+                console.log(err);
+            }
         }), 6000);
     });
 }

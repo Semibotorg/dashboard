@@ -31,5 +31,14 @@
     "days":"Days",
     "expires-in":"Expires in",
     "server":"Server",
-    "payment-id":"Payment ID"
+    "payment-id":"Payment ID",
+    "auto-alerts":"auto alerts",
+    "twitch":"Twitch",
+    "reddit":"Reddit",
+    "twitter":"Twitter",
+    "youtube":"YouTube",
+    "twitch-autoalert":"Twitch alert",
+    "reddit-autoalert":"Reddit alert",
+    "twitter-autoalert":"Twitter alert",
+    "youtube-autoalert":"YouTube alert"
 }
